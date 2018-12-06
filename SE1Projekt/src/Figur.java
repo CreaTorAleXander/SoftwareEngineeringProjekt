@@ -24,7 +24,7 @@ public abstract class Figur {
 	}
 
 	/**
-	 * @return  wurdeBewegt
+	 * @return wurdeBewegt
 	 */
 	public boolean isWurdeBewegt() {
 		return wurdeBewegt;
@@ -39,7 +39,7 @@ public abstract class Figur {
 	}
 
 	/**
-	 * @return  angriff
+	 * @return angriff
 	 */
 	public Object getAngriff() {
 		return angriff;
@@ -47,27 +47,24 @@ public abstract class Figur {
 
 	/**
 	 * @param angriff
-	 *             angriff wurde gesetzt
+	 *            angriff wurde gesetzt
 	 */
 	public void setAngriff(Object angriff) {
 		this.angriff = angriff;
 	}
-	
+
 	public void angreifen(int x, int y) {
-		
+
 	}
-	
+
 	private boolean pruefeAngriff(int x, int y) {
-		boolean dummy = true  ;
+		boolean dummy = true;
 		return dummy;
-		
+
 	}
-	
+
 	public void erleideSchaden(int x) {
-		
+
 	}
-	
-	
-	
-	
+
 }
