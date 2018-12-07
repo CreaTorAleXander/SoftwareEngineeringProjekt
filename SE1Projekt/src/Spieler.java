@@ -22,7 +22,7 @@ public class Spieler {
      *                dann kontrollieren kann
      */
     public Spieler(List<Figur> figuren) {
-        this.figuren = figuren;
+        this.setFiguren(figuren);
     }
 
     /**
