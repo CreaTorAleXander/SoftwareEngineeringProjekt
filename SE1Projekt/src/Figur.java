@@ -4,7 +4,7 @@
  * @author Julian
  *
  */
-public abstract class Figur {
+public abstract class Figur extends Spielobjekt {
 
 	/**
 	 * Das aktuelle Leben der Figur.
