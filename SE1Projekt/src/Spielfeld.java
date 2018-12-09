@@ -9,6 +9,9 @@ public class Spielfeld {
 	/** Spielobjekte des Spielfeldes */
 	Spielobjekt[][] spielfeld = new Spielobjekt[10][10];
 	
+	/** Temporäres Bewegungsspielfeld */
+	Spielobjekt[][] tempSpielfeld = new Spielobjekt[10][10];
+	
 	/** Ausgewaehlte Figur */
 	Figur gewaehlteFigur; // ???
 	
