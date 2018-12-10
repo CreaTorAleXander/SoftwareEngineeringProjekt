@@ -4,4 +4,7 @@
  * */
 public class Hindernis extends Spielobjekt {
 
+	public void dummy() {
+		
+	}
 }
