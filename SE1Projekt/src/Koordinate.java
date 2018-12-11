@@ -36,6 +36,7 @@ public class Koordinate {
 	public void setX(int x) {
 		this.x = x;
 	}
+	
 
 	/**
 	 * Getter der y-Koordiante

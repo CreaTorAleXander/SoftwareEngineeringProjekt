@@ -5,5 +5,7 @@
  *
  */
 public enum Angriffsart {
+	
 	SCHERE, STEIN, PAPIER;
+	
 }

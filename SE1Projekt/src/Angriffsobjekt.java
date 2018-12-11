@@ -25,7 +25,8 @@ public class Angriffsobjekt {
 	}
 	
 	/* Getter & Setter */
-
+	
+	
 	/**
 	 * Getter der Koordinate des Angriffsobjektes
 	 * 
