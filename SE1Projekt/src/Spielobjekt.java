@@ -8,4 +8,12 @@ public abstract class Spielobjekt {
 	
 	Spielobjekt() {
 	}
+
+	public Koordinate getK1() {
+		return k1;
+	}
+
+	public void setK1(Koordinate k1) {
+		this.k1 = k1;
+	}
 }

@@ -16,7 +16,9 @@ public abstract class Figur extends Spielobjekt {
 	 */
 	private boolean wurdeBewegt = false;
 	
-	public boolean wurdeGesetzt = false;
+	private int zugweite;
+	
+	private boolean wurdeGesetzt = false;
 	
 	/**
 	 * Das aktuelle Angriffsobjekt der Figur. Wird spÃ¤ter vom Typ Angriffsobjekt sein.
@@ -30,9 +32,26 @@ public abstract class Figur extends Spielobjekt {
 	 * @param wurdeBewegt Ob die Figur bewegt wurde
 	 * @param angriffsart Die Angriffsart der Figur
 	 */
-	protected Figur(int leben) {
+	protected Figur(int leben, int zugweite) {
         this.setLeben(leben);
+        this.setZugweite(zugweite);
     }
+	
+	public int getZugweite() {
+		return zugweite;
+	}
+
+	public void setZugweite(int zugweite) {
+		this.zugweite = zugweite;
+	}
+
+	public boolean isWurdeGesetzt() {
+		return wurdeGesetzt;
+	}
+
+	public void setWurdeGesetzt(boolean wurdeGesetzt) {
+		this.wurdeGesetzt = wurdeGesetzt;
+	}
 
     /**
      * Gibt das Leben der Figur zurueck.
