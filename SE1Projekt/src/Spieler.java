@@ -1,3 +1,5 @@
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +15,8 @@ public class Spieler {
      * Liste in der die Figuren des Spielers
      * gespeichert werden.
      */
-    private List<Figur> figuren;
+    private List<Figur> figuren = new ArrayList<Figur>();
+    
     
     /**
      * Erzeugt ein neues Objekt.
@@ -21,8 +24,13 @@ public class Spieler {
      * @param figuren Die Figuren die der Spieler 
      *                dann kontrollieren kann
      */
-    public Spieler(List<Figur> figuren) {
+    public Spieler() {
         this.setFiguren(figuren);
+        figuren.add(new Reiter());
+        figuren.add(new Schwertkaempfer());
+        figuren.add(new Magier());
+        figuren.add(new Bogenschuetze());
+        figuren.add(new Lanzentraeger());
     }
 
     /**
