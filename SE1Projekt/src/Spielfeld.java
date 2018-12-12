@@ -41,14 +41,15 @@ public class Spielfeld {
 		// Iteration über Startpositionen
 		for (int i = 0; i < 10; i = i + 2) {
 			// Wenn Figur schon gesetzt, solange neue Zufallszahl bestimmen, bis..
-			while (firstFiguren.get(index).wurdeGesetzt) {
+			while (firstFiguren.get(index).isWurdeGesetzt()) {
 				index = r.nextInt(5);
 			}
 			// ...Figur noch nicht gesetzt wurde. Dann auf Brett setzen.
-			if (!firstFiguren.get(index).wurdeGesetzt)
+			if (!firstFiguren.get(index).isWurdeGesetzt()) {
 				spielfeld[i][0] = firstFiguren.get(index);
-			firstFiguren.get(index).wurdeGesetzt = true;
-			firstFiguren.get(index).k1 = new Koordinate(0, i);
+				firstFiguren.get(index).setWurdeGesetzt(true); 
+				firstFiguren.get(index).setK1(new Koordinate(i, 0)); // = new Koordinate(0, i);
+			}
 		}
 
 		// Wählt per Zufallszahl eine der 5 Figuren
@@ -56,22 +57,26 @@ public class Spielfeld {
 		// Iteration über Startpositionen
 		for (int i = 1; i < 10; i = i + 2) {
 			// Wenn Figur schon gesetzt, solange neue Zufallszahl bestimmen, bis..
-			while (secondFiguren.get(index2).wurdeGesetzt) {
+			while (secondFiguren.get(index2).isWurdeGesetzt()) {
 				index2 = r.nextInt(5);
 			}
 			// ...Figur noch nicht gesetzt wurde. Dann auf Brett setzen.
-			if (!secondFiguren.get(index2).wurdeGesetzt)
+			if (!secondFiguren.get(index2).isWurdeGesetzt()) {
 				spielfeld[i][9] = secondFiguren.get(index2);
-			secondFiguren.get(index2).wurdeGesetzt = true;
-			secondFiguren.get(index2).k1 = new Koordinate(0, i);
+				secondFiguren.get(index2).setWurdeGesetzt(true);
+				secondFiguren.get(index2).k1 = new Koordinate(i, 9);
+			}
 		}
 	}
 	
 	/**
 	 * Lässt Spieler eine Figur auswaehlen, welche in "gewaehlteFigur" gespeichert wird.
 	 */
-	void waehleFigur(/*Koordinate*/) {
-		//Figur nur wählen, wenn in eigener Liste vorhanden?
+	void waehleFigur(Koordinate wahl, Spieler player) {
+		//Figur nur wählen, wenn in eigener Liste vorhanden
+		if(player.getFiguren().contains(spielfeld[wahl.getX()][wahl.getY()]))
+			gewaehlteFigur = (Figur)spielfeld[wahl.getX()][wahl.getY()];
+		//else: Exception kann geworfen werden und in der Spiel-main gehandlet werden
 	}
 	
 	/**
@@ -80,19 +85,43 @@ public class Spielfeld {
 	 * 
 	 * @param zuBewegen
 	 */
-	void bewegeFigur(Figur zuBewegen /*,Koordinate als Ziel*/) {
-		this.pruefeBewegung();
-		//Bewegen, wenn pruefeBewegung == true
-		zuBewegen.setWurdeBewegt(true);
+	void bewegeFigur(Koordinate ziel) {
+		if(pruefeBewegung(ziel)) {
+			//Figur verschieben
+			spielfeld[ziel.getX()][ziel.getY()] = gewaehlteFigur;
+			//Figur vom alten Platz löschen
+			spielfeld[gewaehlteFigur.getK1().getX()][gewaehlteFigur.getK1().getY()] = null;
+			//Figur neue Koordinaten zuweisen
+			gewaehlteFigur.setK1(new Koordinate(ziel.getX(), ziel.getY()));
+			//Bewegte Figur als bewegt markieren
+			gewaehlteFigur.setWurdeBewegt(true);
+		}
+		
+		
+		//Exception-Handling für nicht bewegbare Figur?
 	}
 	
 	/**
 	 * Ueberprueft, ob ein Spielzug möglich ist.
 	 * */
-	boolean pruefeBewegung(/*Zu überprüfende Koordinate*/) {
-		return true; //Wenn die Bewegung möglich ist
+	boolean pruefeBewegung(Koordinate ziel) {
+		
+		//Wenn die Bewegung möglich ist von gewaehlterFigur aus
+			if(spielfeld[ziel.getX()][ziel.getY()] == null) {	
+				if((gewaehlteFigur).getK1().getX()-ziel.getX() <= gewaehlteFigur.getZugweite() && 
+						(gewaehlteFigur.getK1().getX()-ziel.getX()) >= -(gewaehlteFigur.getZugweite())) {
+					if (gewaehlteFigur.getK1().getY()-ziel.getY() <= gewaehlteFigur.getZugweite() && 
+							gewaehlteFigur.getK1().getY()-ziel.getY() >= -(gewaehlteFigur.getZugweite())) {
+						return true;
+					}
+					else return false;
+				}
+				else return false;
+			}
+			else return false;
+				
 	}
-	
+
 	/**
 	 * Gibt das Aktuelle Spielfeld auf der Konsole aus.
 	 */
