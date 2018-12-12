@@ -14,12 +14,14 @@ public abstract class Figur extends Spielobjekt {
 	/**
 	 * Ob die Figur bewegt wurde.
 	 */
-	private boolean wurdeBewegt;
+	private boolean wurdeBewegt = false;
+	
+	public boolean wurdeGesetzt = false;
 	
 	/**
-	 * Das aktuelle Angriffsobjekt der Figur. Wird später vom Typ Angriffsobjekt sein.
+	 * Das aktuelle Angriffsobjekt der Figur. Wird spÃ¤ter vom Typ Angriffsobjekt sein.
 	 */
-	private Object angriffsart;
+	private Angriffsobjekt angriffsart = null;
 
 	/**
 	 * Zu Vererbungszwecken implementiert.
@@ -28,10 +30,8 @@ public abstract class Figur extends Spielobjekt {
 	 * @param wurdeBewegt Ob die Figur bewegt wurde
 	 * @param angriffsart Die Angriffsart der Figur
 	 */
-	private Figur(int leben, boolean wurdeBewegt, Object angriffsart) {
+	protected Figur(int leben) {
         this.setLeben(leben);
-        this.setWurdeBewegt(wurdeBewegt);
-        this.setAngriffsart(angriffsart);
     }
 
     /**
@@ -85,8 +85,13 @@ public abstract class Figur extends Spielobjekt {
      * 
      * @param angriffsart Die zu setzende Angriffsart der Figur
      */
-    public void setAngriffsart(Object angriffsart) {
+    public void setAngriffsart(Angriffsobjekt angriffsart) {
         this.angriffsart = angriffsart;
+    }
+    
+    public void printHP() {
+    	System.out.print("|HP: " + leben + " ");
+    
     }
 
 
