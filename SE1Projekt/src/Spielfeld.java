@@ -1,3 +1,4 @@
+import java.util.*;
 
 /**
  * Klasse, die ein Spielfeld repräsentiert. Sie enthält ein 2-dimensionales Array
@@ -9,7 +10,7 @@ public class Spielfeld {
 	/** Spielobjekte des Spielfeldes */
 	Spielobjekt[][] spielfeld = new Spielobjekt[10][10];
 	
-	/** Temporäres Bewegungsspielfeld */
+	/** Temporäres Bewegungsspielfeld um Züge vor Gegner zu verstecken */
 	Spielobjekt[][] tempSpielfeld = new Spielobjekt[10][10];
 	
 	/** Ausgewaehlte Figur */
@@ -18,9 +19,9 @@ public class Spielfeld {
 	/** 
 	 * Platziert Objekte auf dem Spielfeld
 	 * */
-	void platziereObjekte() { 
+	void platziereObjekte(List<Figur> firstFiguren, List<Figur> secondFiguren) { 
 		this.generiereHindernisse();
-		this.platziereFiguren();
+		this.platziereFiguren(firstFiguren, secondFiguren);
 	}
 	
 	/**
@@ -33,15 +34,44 @@ public class Spielfeld {
 	/**
 	 * Platziert Figuren auf dem Spielfeld.
 	 */
-	void platziereFiguren() {
-		
+	void platziereFiguren(List<Figur> firstFiguren, List<Figur> secondFiguren) {
+		Random r = new Random();
+		// Wählt per Zufallszahl eine der 5 Figuren
+		int index = r.nextInt(5);
+		// Iteration über Startpositionen
+		for (int i = 0; i < 10; i = i + 2) {
+			// Wenn Figur schon gesetzt, solange neue Zufallszahl bestimmen, bis..
+			while (firstFiguren.get(index).wurdeGesetzt) {
+				index = r.nextInt(5);
+			}
+			// ...Figur noch nicht gesetzt wurde. Dann auf Brett setzen.
+			if (!firstFiguren.get(index).wurdeGesetzt)
+				spielfeld[i][0] = firstFiguren.get(index);
+			firstFiguren.get(index).wurdeGesetzt = true;
+			firstFiguren.get(index).k1 = new Koordinate(0, i);
+		}
+
+		// Wählt per Zufallszahl eine der 5 Figuren
+		int index2 = r.nextInt(5);
+		// Iteration über Startpositionen
+		for (int i = 1; i < 10; i = i + 2) {
+			// Wenn Figur schon gesetzt, solange neue Zufallszahl bestimmen, bis..
+			while (secondFiguren.get(index2).wurdeGesetzt) {
+				index2 = r.nextInt(5);
+			}
+			// ...Figur noch nicht gesetzt wurde. Dann auf Brett setzen.
+			if (!secondFiguren.get(index2).wurdeGesetzt)
+				spielfeld[i][9] = secondFiguren.get(index2);
+			secondFiguren.get(index2).wurdeGesetzt = true;
+			secondFiguren.get(index2).k1 = new Koordinate(0, i);
+		}
 	}
 	
 	/**
 	 * Lässt Spieler eine Figur auswaehlen, welche in "gewaehlteFigur" gespeichert wird.
 	 */
 	void waehleFigur(/*Koordinate*/) {
-		
+		//Figur nur wählen, wenn in eigener Liste vorhanden?
 	}
 	
 	/**
@@ -67,8 +97,51 @@ public class Spielfeld {
 	 * Gibt das Aktuelle Spielfeld auf der Konsole aus.
 	 */
 	void printSpielfeld() {
-		
-	}
+		System.out.println("      1      2      3      4      5      6      7      8      9      10");
+		System.out.print("   _______________________________________________________________________");
+		for (int row = 0; row < 10; row++)
+	      {
+			 
+			System.out.println("");
+			//System.out.print("A");
+	          for (int column = 0; column < 10; column++)
+	          {
+	              if(column == 0)
+	            	  System.out.print("   ");
+	              if(spielfeld[row][column] == null)
+	            	  System.out.print("|  " + " " + " " + " " + " ");
+	        	  if(spielfeld[row][column] instanceof Figur)
+	        		  System.out.print("|" + spielfeld[row][column].toString());
+	              
+	          }   
+	          System.out.print("|\n");
+	          for (int column = 0; column < 10; column++)
+	          {
+	        	  if(column == 0)
+	        		  System.out.print((char)(row+65) + "  ");
+	        	  if(spielfeld[row][column] == null)
+	        		  System.out.print("|  " + " " + " " + " " + " ");
+	        	  if(spielfeld[row][column] instanceof Figur)	
+	        		  ((Figur)spielfeld[row][column]).printHP();
+	              
+	          }   
+	          System.out.print("|\n");
+	          for (int column = 0; column < 10; column++)
+	          {
+	        	  if(column == 0)
+	        		  System.out.print("   ");
+	              System.out.print("|__" + "_" + "_" + "_" + "_");
+	              //Hinderniss durch zusätzliche if-Abfrage einbauen?
+	              
+	          }   
+	          System.out.print("|");
+	   
+	    }
+	    System.out.println("");
+	    //System.out.println("-----------------------------------------");
+	    //System.out.println("_________________________________________");
+	 }
+	
 	
 	/**
 	 * Gibt das Spielfeld als Array zurueck.
