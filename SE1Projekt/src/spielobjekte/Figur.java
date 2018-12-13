@@ -1,3 +1,5 @@
+package spielobjekte;
+
 /**
  * Eine Klasse, die eine Figur repraesentiert.
  * 
@@ -21,6 +23,11 @@ public abstract class Figur extends Spielobjekt {
 	private boolean wurdeGesetzt = false;
 	
 	/**
+	 * Name der jeweiligen Art von Figur
+	 */
+	private Abkuerzung name;
+	
+	/**
 	 * Das aktuelle Angriffsobjekt der Figur. Wird spÃ¤ter vom Typ Angriffsobjekt sein.
 	 */
 	private Angriffsobjekt angriffsart = null;
@@ -33,9 +40,20 @@ public abstract class Figur extends Spielobjekt {
 	 * @param angriffsart Die Angriffsart der Figur
 	 */
 	protected Figur(int leben, int zugweite) {
-        this.setLeben(leben);
+	    this.setLeben(leben);
         this.setZugweite(zugweite);
     }
+	
+	/**
+	 * Enum, die die erlaubten Abkuerzungen der 
+	 * Figuren festlegt.
+	 * 
+	 * @author Julian
+	 *
+	 */
+	protected enum Abkuerzung{
+	    LT, MAG, BOG, REI, SK 
+	}
 	
 	public int getZugweite() {
 		return zugweite;
@@ -95,7 +113,7 @@ public abstract class Figur extends Spielobjekt {
      * 
      * @return Die Angriffsart der Figur
      */
-    public Object getAngriffsart() {
+    public Angriffsobjekt getAngriffsart() {
         return this.angriffsart;
     }
 
@@ -107,11 +125,36 @@ public abstract class Figur extends Spielobjekt {
     public void setAngriffsart(Angriffsobjekt angriffsart) {
         this.angriffsart = angriffsart;
     }
+
+    /**
+     * Gibt den Name der Figur zurueck.
+     * 
+     * @return Den Namen der Figur
+     */
+    public Abkuerzung getName() {
+        return this.name;
+    }
+
+    /**
+     * Setzt den Namen für die Figur.
+     * 
+     * @param Der zu setzende Name
+     */
+    protected void setName(Abkuerzung name) {
+        this.name = name;
+    }
     
-    public void printHP() {
+    /**
+     * Gibt einen String mit Herzen zurueck, abhaengig von der Anzahl der Leben
+     * der Figur.
+     * 
+     * @return String mit Herzen
+     */
+    /*
+    public String printHP() {
     	System.out.print("|HP: " + leben + " ");
     
     }
-
+    */
 
 }

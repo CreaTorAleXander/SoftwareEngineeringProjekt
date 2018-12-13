@@ -1,3 +1,4 @@
+package spielobjekte;
 
 /**
  * Ein Spielobjekt, welches als Hindernis fungiert.

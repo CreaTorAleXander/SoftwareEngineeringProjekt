@@ -1,3 +1,7 @@
+package spielobjekte;
+import Angriffsart;
+import Koordinate;
+
 /**
  * Eine Klasse, die ein Angriffsobjekt erzeugen soll
  * 
@@ -56,7 +60,7 @@ public class Angriffsobjekt {
 	}
 	
 	/**
-	 * Überschreibt die Angriffsart mit einer 
+	 * ï¿½berschreibt die Angriffsart mit einer 
 	 * Neuen
 	 * 
 	 * @param angriffshaltung
@@ -77,10 +81,10 @@ public class Angriffsobjekt {
 	/* ------------*/
 	
 	
-	/* Zusätzliche Methoden */
+	/* Zusï¿½tzliche Methoden */
 	
 	/**
-	 * Erhöht den erlittenen Schaden um eine gewisse Zahl
+	 * Erhï¿½ht den erlittenen Schaden um eine gewisse Zahl
 	 * 
 	 * @param schaden
 	 */

@@ -1,3 +1,4 @@
+package spielobjekte;
 
 public class Schwertkaempfer extends Figur {
 

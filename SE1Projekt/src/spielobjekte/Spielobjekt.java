@@ -1,6 +1,10 @@
+package spielobjekte;
+import Koordinate;
 
 /**
- * Abstrakte Klasse, die ein Spielobjekt repräsentiert
+ * Abstrakte Klasse, die ein Spielobjekt reprï¿½sentiert
+ * 
+ * 
  * */
 public abstract class Spielobjekt {
 	//Koordinate als Klassenvariable

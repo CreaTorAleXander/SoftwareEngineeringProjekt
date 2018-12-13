@@ -2,6 +2,13 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import spielobjekte.Bogenschuetze;
+import spielobjekte.Figur;
+import spielobjekte.Lanzentraeger;
+import spielobjekte.Magier;
+import spielobjekte.Reiter;
+import spielobjekte.Schwertkaempfer;
+
 /**
  * Objekte dieser Klasse repraesentieren einen Spieler.
  * Dieser zeichnet sich durch die Figuren aus, die er kontrolliert.
@@ -20,12 +27,10 @@ public class Spieler {
     
     /**
      * Erzeugt ein neues Objekt.
-     * 
-     * @param figuren Die Figuren die der Spieler 
-     *                dann kontrollieren kann
+     * Dabei werden die Figuren zu der Liste der Figuren, 
+     * die der Spieler hat hinzugefügt.
      */
     public Spieler() {
-        this.setFiguren(figuren);
         figuren.add(new Reiter());
         figuren.add(new Schwertkaempfer());
         figuren.add(new Magier());

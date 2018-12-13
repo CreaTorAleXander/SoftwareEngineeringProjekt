@@ -1,7 +1,10 @@
 import java.util.*;
 
+import spielobjekte.Figur;
+import spielobjekte.Spielobjekt;
+
 /**
- * Klasse, die ein Spielfeld repräsentiert. Sie enthält ein 2-dimensionales Array
+ * Klasse, die ein Spielfeld reprï¿½sentiert. Sie enthï¿½lt ein 2-dimensionales Array
  * zur Darstellung der Spielobjekte.
  * 
  * */
@@ -10,7 +13,7 @@ public class Spielfeld {
 	/** Spielobjekte des Spielfeldes */
 	Spielobjekt[][] spielfeld = new Spielobjekt[10][10];
 	
-	/** Temporäres Bewegungsspielfeld um Züge vor Gegner zu verstecken */
+	/** Temporï¿½res Bewegungsspielfeld um Zï¿½ge vor Gegner zu verstecken */
 	Spielobjekt[][] tempSpielfeld = new Spielobjekt[10][10];
 	
 	/** Ausgewaehlte Figur */
@@ -36,9 +39,9 @@ public class Spielfeld {
 	 */
 	void platziereFiguren(List<Figur> firstFiguren, List<Figur> secondFiguren) {
 		Random r = new Random();
-		// Wählt per Zufallszahl eine der 5 Figuren
+		// Wï¿½hlt per Zufallszahl eine der 5 Figuren
 		int index = r.nextInt(5);
-		// Iteration über Startpositionen
+		// Iteration ï¿½ber Startpositionen
 		for (int i = 0; i < 10; i = i + 2) {
 			// Wenn Figur schon gesetzt, solange neue Zufallszahl bestimmen, bis..
 			while (firstFiguren.get(index).isWurdeGesetzt()) {
@@ -52,9 +55,9 @@ public class Spielfeld {
 			}
 		}
 
-		// Wählt per Zufallszahl eine der 5 Figuren
+		// Wï¿½hlt per Zufallszahl eine der 5 Figuren
 		int index2 = r.nextInt(5);
-		// Iteration über Startpositionen
+		// Iteration ï¿½ber Startpositionen
 		for (int i = 1; i < 10; i = i + 2) {
 			// Wenn Figur schon gesetzt, solange neue Zufallszahl bestimmen, bis..
 			while (secondFiguren.get(index2).isWurdeGesetzt()) {
@@ -70,17 +73,17 @@ public class Spielfeld {
 	}
 	
 	/**
-	 * Lässt Spieler eine Figur auswaehlen, welche in "gewaehlteFigur" gespeichert wird.
+	 * Lï¿½sst Spieler eine Figur auswaehlen, welche in "gewaehlteFigur" gespeichert wird.
 	 */
 	void waehleFigur(Koordinate wahl, Spieler player) {
-		//Figur nur wählen, wenn in eigener Liste vorhanden
+		//Figur nur wï¿½hlen, wenn in eigener Liste vorhanden
 		if(player.getFiguren().contains(spielfeld[wahl.getX()][wahl.getY()]))
 			gewaehlteFigur = (Figur)spielfeld[wahl.getX()][wahl.getY()];
 		//else: Exception kann geworfen werden und in der Spiel-main gehandlet werden
 	}
 	
 	/**
-	 * Lässt den Spieler eine Figur bewegen, die Bewegungen werden in einem extra 
+	 * Lï¿½sst den Spieler eine Figur bewegen, die Bewegungen werden in einem extra 
 	 * Spielfeld-Array gespeichert.
 	 * 
 	 * @param zuBewegen
@@ -89,7 +92,7 @@ public class Spielfeld {
 		if(pruefeBewegung(ziel)) {
 			//Figur verschieben
 			spielfeld[ziel.getX()][ziel.getY()] = gewaehlteFigur;
-			//Figur vom alten Platz löschen
+			//Figur vom alten Platz lï¿½schen
 			spielfeld[gewaehlteFigur.getK1().getX()][gewaehlteFigur.getK1().getY()] = null;
 			//Figur neue Koordinaten zuweisen
 			gewaehlteFigur.setK1(new Koordinate(ziel.getX(), ziel.getY()));
@@ -98,15 +101,15 @@ public class Spielfeld {
 		}
 		
 		
-		//Exception-Handling für nicht bewegbare Figur?
+		//Exception-Handling fï¿½r nicht bewegbare Figur?
 	}
 	
 	/**
-	 * Ueberprueft, ob ein Spielzug möglich ist.
+	 * Ueberprueft, ob ein Spielzug mï¿½glich ist.
 	 * */
 	boolean pruefeBewegung(Koordinate ziel) {
 		
-		//Wenn die Bewegung möglich ist von gewaehlterFigur aus
+		//Wenn die Bewegung mï¿½glich ist von gewaehlterFigur aus
 			if(spielfeld[ziel.getX()][ziel.getY()] == null) {	
 				if((gewaehlteFigur).getK1().getX()-ziel.getX() <= gewaehlteFigur.getZugweite() && 
 						(gewaehlteFigur.getK1().getX()-ziel.getX()) >= -(gewaehlteFigur.getZugweite())) {
@@ -160,7 +163,7 @@ public class Spielfeld {
 	        	  if(column == 0)
 	        		  System.out.print("   ");
 	              System.out.print("|__" + "_" + "_" + "_" + "_");
-	              //Hinderniss durch zusätzliche if-Abfrage einbauen?
+	              //Hinderniss durch zusï¿½tzliche if-Abfrage einbauen?
 	              
 	          }   
 	          System.out.print("|");
