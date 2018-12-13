@@ -1,3 +1,4 @@
+package spielobjekte;
 /**
  * Eine Klasse die Koordinaten auf dem Spielfeld simulieren soll
  * 
@@ -29,7 +30,7 @@ public class Koordinate {
 	}
 
 	/**
-	 * Überschreibt die x-Koordinate
+	 * ï¿½berschreibt die x-Koordinate
 	 * 
 	 * @param y
 	 */
@@ -48,7 +49,7 @@ public class Koordinate {
 	}
 
 	/**
-	 * Überschreibt die y-Koordinate
+	 * ï¿½berschreibt die y-Koordinate
 	 * 
 	 * @param y
 	 */

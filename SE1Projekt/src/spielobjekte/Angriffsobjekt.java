@@ -1,6 +1,4 @@
 package spielobjekte;
-import Angriffsart;
-import Koordinate;
 
 /**
  * Eine Klasse, die ein Angriffsobjekt erzeugen soll

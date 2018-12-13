@@ -1,5 +1,7 @@
 import java.util.*;
 
+import spielobjekte.Koordinate;
+
 public class Spiel {
 	
 	public static void main(String[] args) {

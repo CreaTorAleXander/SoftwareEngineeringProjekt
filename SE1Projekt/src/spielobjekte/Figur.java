@@ -18,12 +18,18 @@ public abstract class Figur extends Spielobjekt {
 	 */
 	private boolean wurdeBewegt = false;
 	
-	//private int zugweite;
-	
-	//private boolean wurdeGesetzt = false;
+	/**
+	 * Die Zugweite der Figur.
+	 */
+	private int zugweite;
 	
 	/**
-	 * Name der jeweiligen Art von Figur
+	 * Ob die Figur bisher gesetzt wurde.
+	 */
+	private boolean wurdeGesetzt = false;
+	
+	/**
+	 * Name der jeweiligen Art von Figur.
 	 */
 	private Abkuerzung name;
 	
@@ -40,7 +46,7 @@ public abstract class Figur extends Spielobjekt {
 	 */
 	protected Figur(int leben, int zugweite) {
 	    this.setLeben(leben);
-        //this.setZugweite(zugweite);
+        this.setZugweite(zugweite);
     }
 	
 	/**
@@ -54,22 +60,22 @@ public abstract class Figur extends Spielobjekt {
 	    LT, MAG, BOG, REI, SK 
 	}
 	
-	// @Joshi, weiß noch nicht wofür wir die brauchen
-//	public int getZugweite() {
-//		return zugweite;
-//	}
-//
-//	public void setZugweite(int zugweite) {
-//		this.zugweite = zugweite;
-//	}
-//
-//	public boolean isWurdeGesetzt() {
-//		return wurdeGesetzt;
-//	}
-//
-//	public void setWurdeGesetzt(boolean wurdeGesetzt) {
-//		this.wurdeGesetzt = wurdeGesetzt;
-//	}
+	
+	public int getZugweite() {
+		return zugweite;
+	}
+
+	public void setZugweite(int zugweite) {
+		this.zugweite = zugweite;
+	}
+
+	public boolean isWurdeGesetzt() {
+		return wurdeGesetzt;
+	}
+
+	public void setWurdeGesetzt(boolean wurdeGesetzt) {
+		this.wurdeGesetzt = wurdeGesetzt;
+	}
 
     /**
      * Gibt das Leben der Figur zurueck.
@@ -150,11 +156,11 @@ public abstract class Figur extends Spielobjekt {
      * 
      * @return String mit Herzen
      */
-    /*
-    public String printHP() {
+    
+    public void printHP() {
     	System.out.print("|HP: " + leben + " ");
     
     }
-    */
+    
 
 }

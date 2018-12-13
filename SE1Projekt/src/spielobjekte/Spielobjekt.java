@@ -1,5 +1,4 @@
 package spielobjekte;
-import Koordinate;
 
 /**
  * Abstrakte Klasse, die ein Spielobjekt repr�sentiert
@@ -8,7 +7,7 @@ import Koordinate;
  * */
 public abstract class Spielobjekt {
 	//Koordinate als Klassenvariable
-	Koordinate k1 = null;
+	public Koordinate k1 = null;
 	
 	Spielobjekt() {
 	}

@@ -1,6 +1,7 @@
 import java.util.*;
 
 import spielobjekte.Figur;
+import spielobjekte.Koordinate;
 import spielobjekte.Spielobjekt;
 
 /**

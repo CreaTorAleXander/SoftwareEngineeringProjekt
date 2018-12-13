@@ -1,5 +1,6 @@
+package spielobjekte;
 /**
- * Eine Aufzählung der Angriffsarten
+ * Eine Aufzï¿½hlung der Angriffsarten
  * 
  * @author Mert
  *
