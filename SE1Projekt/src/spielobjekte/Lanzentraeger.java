@@ -5,7 +5,7 @@ public class Lanzentraeger extends Figur{
 	
 	public Lanzentraeger() {
 		super(1, 1);
-		this.name = Abkuerzung.LT;
+		this.name = Abkuerzung.LAT;
 	}
 	
 	public String toString() {
