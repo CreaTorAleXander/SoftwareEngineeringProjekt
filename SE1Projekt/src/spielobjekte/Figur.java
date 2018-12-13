@@ -18,9 +18,9 @@ public abstract class Figur extends Spielobjekt {
 	 */
 	private boolean wurdeBewegt = false;
 	
-	private int zugweite;
+	//private int zugweite;
 	
-	private boolean wurdeGesetzt = false;
+	//private boolean wurdeGesetzt = false;
 	
 	/**
 	 * Name der jeweiligen Art von Figur
@@ -28,20 +28,19 @@ public abstract class Figur extends Spielobjekt {
 	private Abkuerzung name;
 	
 	/**
-	 * Das aktuelle Angriffsobjekt der Figur. Wird spÃ¤ter vom Typ Angriffsobjekt sein.
+	 * Das aktuelle Angriffsobjekt der Figur. 
 	 */
-	private Angriffsobjekt angriffsart = null;
+	private Angriffsobjekt angriffsart;
 
 	/**
 	 * Zu Vererbungszwecken implementiert.
 	 * 
 	 * @param leben Das Leben der Figur
-	 * @param wurdeBewegt Ob die Figur bewegt wurde
-	 * @param angriffsart Die Angriffsart der Figur
+	 * 
 	 */
 	protected Figur(int leben, int zugweite) {
 	    this.setLeben(leben);
-        this.setZugweite(zugweite);
+        //this.setZugweite(zugweite);
     }
 	
 	/**
@@ -55,21 +54,22 @@ public abstract class Figur extends Spielobjekt {
 	    LT, MAG, BOG, REI, SK 
 	}
 	
-	public int getZugweite() {
-		return zugweite;
-	}
-
-	public void setZugweite(int zugweite) {
-		this.zugweite = zugweite;
-	}
-
-	public boolean isWurdeGesetzt() {
-		return wurdeGesetzt;
-	}
-
-	public void setWurdeGesetzt(boolean wurdeGesetzt) {
-		this.wurdeGesetzt = wurdeGesetzt;
-	}
+	// @Joshi, weiß noch nicht wofür wir die brauchen
+//	public int getZugweite() {
+//		return zugweite;
+//	}
+//
+//	public void setZugweite(int zugweite) {
+//		this.zugweite = zugweite;
+//	}
+//
+//	public boolean isWurdeGesetzt() {
+//		return wurdeGesetzt;
+//	}
+//
+//	public void setWurdeGesetzt(boolean wurdeGesetzt) {
+//		this.wurdeGesetzt = wurdeGesetzt;
+//	}
 
     /**
      * Gibt das Leben der Figur zurueck.
@@ -77,7 +77,7 @@ public abstract class Figur extends Spielobjekt {
 	 * @return Das Leben der Figur
 	 */
 	public int getLeben() {
-		return leben;
+		return this.leben;
 	}
 
 	/**
@@ -95,7 +95,7 @@ public abstract class Figur extends Spielobjekt {
 	 * @return Ob die Figur bewegt wurde
 	 */
 	public boolean isWurdeBewegt() {
-		return wurdeBewegt;
+		return this.wurdeBewegt;
 	}
 
 	/**
