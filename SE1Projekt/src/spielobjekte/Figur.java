@@ -1,7 +1,7 @@
 package spielobjekte;
 
 /**
- * Eine Klasse, die eine Figur repraesentiert.
+ * Eine abstrakte Klasse, die eine Figur repraesentiert.
  * 
  * @author Julian
  *
@@ -29,7 +29,7 @@ public abstract class Figur extends Spielobjekt {
     private boolean wurdeGesetzt = false;
 
     /**
-     * Name der jeweiligen Art von Figur.
+     * Name der jeweiligen Art von Figur (jeweils passende Abkuerzung).
      */
     private Abkuerzung name;
 
@@ -37,6 +37,16 @@ public abstract class Figur extends Spielobjekt {
      * Das aktuelle Angriffsobjekt der Figur.
      */
     private Angriffsobjekt angriffsart;
+
+    /**
+     * ID, die angibt von welchem Spieler die Figur kontrolliert wird.
+     */
+    private int id;
+
+    /**
+     * Die Koordinaten der Figur auf dem Spielfeld.
+     */
+    private Koordinate koordinaten;
 
     /**
      * Zu Vererbungszwecken implementiert.
@@ -50,8 +60,9 @@ public abstract class Figur extends Spielobjekt {
     }
 
     /**
-     * Enum, die die erlaubten Abkuerzungen der Figuren festlegt.
-     * Die dargestellten Abkürzungen sind ein Beispiel.
+     * Enum, die die erlaubten Abkuerzungen der Figuren festlegt. Die dargestellten
+     * Abkürzungen sind ein Beispiel.
+     * 
      * @author Julian
      *
      */
@@ -110,7 +121,7 @@ public abstract class Figur extends Spielobjekt {
      * 
      * @param zugweite Die zu setzende Zugweite
      */
-    public void setZugweite(int zugweite) {
+    protected void setZugweite(int zugweite) {
         this.zugweite = zugweite;
     }
 
@@ -166,6 +177,24 @@ public abstract class Figur extends Spielobjekt {
      */
     public void setAngriffsart(Angriffsobjekt angriffsart) {
         this.angriffsart = angriffsart;
+    }
+
+    /**
+     * Gibt die ID der Figur zurueck.
+     * 
+     * @return Die ID der Figur
+     */
+    public int getId() {
+        return this.id;
+    }
+
+    /**
+     * Setzt die ID der Figur.
+     * 
+     * @param id Die zu setzende ID
+     */
+    protected void setId(int id) {
+        this.id = id;
     }
 
     /**

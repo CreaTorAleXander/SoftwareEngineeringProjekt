@@ -13,7 +13,7 @@ public abstract class Spielobjekt {
 	}
 
 	public Koordinate getK1() {
-		return k1;
+		return this.k1;
 	}
 
 	public void setK1(Koordinate k1) {

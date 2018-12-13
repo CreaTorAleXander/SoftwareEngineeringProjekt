@@ -193,7 +193,26 @@ public class Spielfeld {
 		this.spielfeld = spielfeld;
 	}
 	
+	
 	/**
+	 * Gibt das temporaere Spielfeld zurueck.
+	 * 
+     * @return Das temporaere Spielfeld
+     */
+    public Spielobjekt[][] getTempSpielfeld() {
+        return tempSpielfeld;
+    }
+
+    /**
+     * Setzt das temporaere Spielfeld.
+     * 
+     * @param tempSpielfeld Das zu setzende temporaere Spielfeld
+     */
+    public void setTempSpielfeld(Spielobjekt[][] tempSpielfeld) {
+        this.tempSpielfeld = tempSpielfeld;
+    }
+
+    /**
 	 * Gibt die aktuell gewaehlte Figur zurueck.
 	 * 
 	 * @return Gewaehlte Figur
