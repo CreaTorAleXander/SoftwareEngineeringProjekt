@@ -9,11 +9,10 @@ package spielobjekte;
  *
  */
 public class Lanzentraeger extends Figur {
-   
-    
+
     /**
-     * Erzeugung eines neuen Objekts mit 1 Leben, der Zugweite 1 und mit der Abkuerzung 
-     * LAT als Namen.
+     * Erzeugung eines neuen Objekts mit 1 Leben, der Zugweite 1 und mit der
+     * Abkuerzung LAT als Namen.
      */
     public Lanzentraeger(int id) {
         super(1, 1);
@@ -24,4 +23,5 @@ public class Lanzentraeger extends Figur {
     public String toString() {
         return "LZT   ";
     }
+
 }
