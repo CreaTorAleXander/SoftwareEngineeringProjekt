@@ -1,40 +1,90 @@
+package spiellogik;
+
 import java.util.*;
 
-import spielobjekte.Figur;
-import spielobjekte.Koordinate;
-import spielobjekte.Spielobjekt;
+import spielobjekte.*;
 
 /**
- * Klasse, die ein Spielfeld reprï¿½sentiert. Sie enthï¿½lt ein 2-dimensionales Array
- * zur Darstellung der Spielobjekte.
+ * Klasse, die ein Spielfeld reprï¿½sentiert. Sie enthï¿½lt ein 2-dimensionales
+ * Array zur Darstellung der Spielobjekte.
  * 
- * */
+ */
 public class Spielfeld {
-	
+
 	/** Spielobjekte des Spielfeldes */
 	Spielobjekt[][] spielfeld = new Spielobjekt[10][10];
-	
+
 	/** Temporï¿½res Bewegungsspielfeld um Zï¿½ge vor Gegner zu verstecken */
 	Spielobjekt[][] tempSpielfeld = new Spielobjekt[10][10];
-	
+
 	/** Ausgewaehlte Figur */
 	Figur gewaehlteFigur; // ???
-	
-	/** 
+
+	/**
 	 * Platziert Objekte auf dem Spielfeld
-	 * */
-	void platziereObjekte(List<Figur> firstFiguren, List<Figur> secondFiguren) { 
+	 */
+	void platziereObjekte(List<Figur> firstFiguren, List<Figur> secondFiguren) {
 		this.generiereHindernisse();
 		this.platziereFiguren(firstFiguren, secondFiguren);
 	}
-	
+
 	/**
 	 * Platziert Hindernisse auf dem Spielfeld
 	 */
 	void generiereHindernisse() {
-		
+
+		List<Hindernis> h = new ArrayList<Hindernis>();
+		Random r = new Random();
+		int zeile = r.nextInt(2) + 1; // Zufallszahl 1..2, dient dazu den index der for-Schleife zu iterieren
+		int anzahlKleineH = 0; // Anz. der bereits gesetzten kleinen Hindernisse
+		int anzahlGrosseH = 0; // Anz. der bereits gesetzten großen Hindernisse
+
+		// 5 Hindernisse, die zufällig 1 oder 2 Zeilen auseinander liegen (Spielfeld 10
+		// Felder groß, 5 Hindernise => max. 2 Zeilen Abstand)
+		for (int i = r.nextInt(2); i < 10; i = i + zeile) {
+
+			int spalte = r.nextInt(8) + 1; // Zufällige Platzierung des Hindernisses in der Spalte
+			int hindernisart = r.nextInt(2); // Für Zufallswahl ob kleines oder großes Hindernis platziert werden soll
+
+			if (hindernisart == 1 && anzahlGrosseH >= 2) // Falls keine kleinen HIndernisse mehr übrig sind, soll ein
+															// großes platziert werden
+				hindernisart = 0;
+
+			if (hindernisart == 0 && anzahlKleineH >= 3) // Falls keine großen Hindernisse mehr übrig sind, soll ein
+															// kleines platziert werden
+				hindernisart = 1;
+
+			if (hindernisart == 0 && anzahlKleineH < 3) { // //Platzieren eines kleinen HIndernisses
+				spielfeld[i][spalte] = new Hindernis();
+				anzahlKleineH++;
+			}
+
+			else if (hindernisart == 1 && anzahlGrosseH < 2) { // Platzieren eines großen Hindernisses
+				if (spalte == 8)
+					spalte--;
+				spielfeld[i][spalte] = new Hindernis();
+				spielfeld[i][spalte + 1] = new Hindernis();
+				anzahlGrosseH++;
+			}
+
+			zeile = r.nextInt(2) + 1;
+
+			// Weitere if-Abfrage!!
+			/*
+			 * switch (hindernisart) { case 0: {
+			 * 
+			 * if (anzahlKleineH < 3) { spielfeld[i][spalte] = new Hindernis();
+			 * anzahlKleineH++; break; } } case 1: { if (anzahlGrosseH < 2) {
+			 * spielfeld[i][spalte] = new Hindernis(); spielfeld[i][spalte+1] = new
+			 * Hindernis(); anzahlGrosseH++; } }
+			 * 
+			 * }
+			 */
+
+		}
+
 	}
-	
+
 	/**
 	 * Platziert Figuren auf dem Spielfeld.
 	 */
@@ -51,7 +101,7 @@ public class Spielfeld {
 			// ...Figur noch nicht gesetzt wurde. Dann auf Brett setzen.
 			if (!firstFiguren.get(index).isWurdeGesetzt()) {
 				spielfeld[i][0] = firstFiguren.get(index);
-				firstFiguren.get(index).setWurdeGesetzt(true); 
+				firstFiguren.get(index).setWurdeGesetzt(true);
 				firstFiguren.get(index).setK1(new Koordinate(i, 0)); // = new Koordinate(0, i);
 			}
 		}
@@ -68,62 +118,62 @@ public class Spielfeld {
 			if (!secondFiguren.get(index2).isWurdeGesetzt()) {
 				spielfeld[i][9] = secondFiguren.get(index2);
 				secondFiguren.get(index2).setWurdeGesetzt(true);
-				secondFiguren.get(index2).k1 = new Koordinate(i, 9);
+				secondFiguren.get(index2).setK1(new Koordinate(i, 9));
 			}
 		}
 	}
-	
+
 	/**
-	 * Lï¿½sst Spieler eine Figur auswaehlen, welche in "gewaehlteFigur" gespeichert wird.
+	 * Lï¿½sst Spieler eine Figur auswaehlen, welche in "gewaehlteFigur" gespeichert
+	 * wird.
 	 */
 	void waehleFigur(Koordinate wahl, Spieler player) {
-		//Figur nur wï¿½hlen, wenn in eigener Liste vorhanden
-		if(player.getFiguren().contains(spielfeld[wahl.getX()][wahl.getY()]))
-			gewaehlteFigur = (Figur)spielfeld[wahl.getX()][wahl.getY()];
-		//else: Exception kann geworfen werden und in der Spiel-main gehandlet werden
+		// Figur nur wï¿½hlen, wenn in eigener Liste vorhanden
+		if (player.getFiguren().contains(spielfeld[wahl.getX()][wahl.getY()]))
+			gewaehlteFigur = (Figur) spielfeld[wahl.getX()][wahl.getY()];
+		// else: Exception kann geworfen werden und in der Spiel-main gehandlet werden
 	}
-	
+
 	/**
-	 * Lï¿½sst den Spieler eine Figur bewegen, die Bewegungen werden in einem extra 
+	 * Lï¿½sst den Spieler eine Figur bewegen, die Bewegungen werden in einem extra
 	 * Spielfeld-Array gespeichert.
 	 * 
 	 * @param zuBewegen
 	 */
 	void bewegeFigur(Koordinate ziel) {
-		if(pruefeBewegung(ziel)) {
-			//Figur verschieben
+		if (pruefeBewegung(ziel)) {
+			// Figur verschieben
 			spielfeld[ziel.getX()][ziel.getY()] = gewaehlteFigur;
-			//Figur vom alten Platz lï¿½schen
+			// Figur vom alten Platz lï¿½schen
 			spielfeld[gewaehlteFigur.getK1().getX()][gewaehlteFigur.getK1().getY()] = null;
-			//Figur neue Koordinaten zuweisen
+			// Figur neue Koordinaten zuweisen
 			gewaehlteFigur.setK1(new Koordinate(ziel.getX(), ziel.getY()));
-			//Bewegte Figur als bewegt markieren
+			// Bewegte Figur als bewegt markieren
 			gewaehlteFigur.setWurdeBewegt(true);
 		}
-		
-		
-		//Exception-Handling fï¿½r nicht bewegbare Figur?
+
+		// Exception-Handling fï¿½r nicht bewegbare Figur?
 	}
-	
+
 	/**
 	 * Ueberprueft, ob ein Spielzug mï¿½glich ist.
-	 * */
+	 */
 	boolean pruefeBewegung(Koordinate ziel) {
-		
-		//Wenn die Bewegung mï¿½glich ist von gewaehlterFigur aus
-			if(spielfeld[ziel.getX()][ziel.getY()] == null) {	
-				if((gewaehlteFigur).getK1().getX()-ziel.getX() <= gewaehlteFigur.getZugweite() && 
-						(gewaehlteFigur.getK1().getX()-ziel.getX()) >= -(gewaehlteFigur.getZugweite())) {
-					if (gewaehlteFigur.getK1().getY()-ziel.getY() <= gewaehlteFigur.getZugweite() && 
-							gewaehlteFigur.getK1().getY()-ziel.getY() >= -(gewaehlteFigur.getZugweite())) {
-						return true;
-					}
-					else return false;
-				}
-				else return false;
-			}
-			else return false;
-				
+
+		// Wenn die Bewegung mï¿½glich ist von gewaehlterFigur aus
+		if (spielfeld[ziel.getX()][ziel.getY()] == null) {
+			if ((gewaehlteFigur).getK1().getX() - ziel.getX() <= gewaehlteFigur.getZugweite()
+					&& (gewaehlteFigur.getK1().getX() - ziel.getX()) >= -(gewaehlteFigur.getZugweite())) {
+				if (gewaehlteFigur.getK1().getY() - ziel.getY() <= gewaehlteFigur.getZugweite()
+						&& gewaehlteFigur.getK1().getY() - ziel.getY() >= -(gewaehlteFigur.getZugweite())) {
+					return true;
+				} else
+					return false;
+			} else
+				return false;
+		} else
+			return false;
+
 	}
 
 	/**
@@ -132,87 +182,68 @@ public class Spielfeld {
 	void printSpielfeld() {
 		System.out.println("      1      2      3      4      5      6      7      8      9      10");
 		System.out.print("   _______________________________________________________________________");
-		for (int row = 0; row < 10; row++)
-	      {
-			 
+		for (int row = 0; row < 10; row++) {
+
 			System.out.println("");
-			//System.out.print("A");
-	          for (int column = 0; column < 10; column++)
-	          {
-	              if(column == 0)
-	            	  System.out.print("   ");
-	              if(spielfeld[row][column] == null)
-	            	  System.out.print("|  " + " " + " " + " " + " ");
-	        	  if(spielfeld[row][column] instanceof Figur)
-	        		  System.out.print("|" + spielfeld[row][column].toString());
-	              
-	          }   
-	          System.out.print("|\n");
-	          for (int column = 0; column < 10; column++)
-	          {
-	        	  if(column == 0)
-	        		  System.out.print((char)(row+65) + "  ");
-	        	  if(spielfeld[row][column] == null)
-	        		  System.out.print("|  " + " " + " " + " " + " ");
-	        	  if(spielfeld[row][column] instanceof Figur)	
-	        		  ((Figur)spielfeld[row][column]).printHP();
-	              
-	          }   
-	          System.out.print("|\n");
-	          for (int column = 0; column < 10; column++)
-	          {
-	        	  if(column == 0)
-	        		  System.out.print("   ");
-	              System.out.print("|__" + "_" + "_" + "_" + "_");
-	              //Hinderniss durch zusï¿½tzliche if-Abfrage einbauen?
-	              
-	          }   
-	          System.out.print("|");
-	   
-	    }
-	    System.out.println("");
-	    //System.out.println("-----------------------------------------");
-	    //System.out.println("_________________________________________");
-	 }
-	
-	
+			// System.out.print("A");
+			for (int column = 0; column < 10; column++) {
+				if (column == 0)
+					System.out.print("   ");
+				if (spielfeld[row][column] == null)
+					System.out.print("|  " + " " + " " + " " + " ");
+				if (spielfeld[row][column] instanceof Figur)
+					System.out.print("|" + spielfeld[row][column].toString());
+				if (spielfeld[row][column] instanceof Hindernis)
+					System.out.print("|" + "XXXXXX");
+			}
+			System.out.print("|\n");
+			for (int column = 0; column < 10; column++) {
+				if (column == 0)
+					System.out.print((char) (row + 65) + "  ");
+				if (spielfeld[row][column] == null)
+					System.out.print("|  " + " " + " " + " " + " ");
+				if (spielfeld[row][column] instanceof Figur)
+					((Figur) spielfeld[row][column]).printHP();
+				if (spielfeld[row][column] instanceof Hindernis)
+					System.out.print("|" + "XXXXXX");
+
+			}
+			System.out.print("|\n");
+			for (int column = 0; column < 10; column++) {
+				if (column == 0)
+					System.out.print("   ");
+				System.out.print("|__" + "_" + "_" + "_" + "_");
+				// Hinderniss durch zusï¿½tzliche if-Abfrage einbauen?
+
+			}
+			System.out.print("|");
+
+		}
+		System.out.println("");
+		// System.out.println("-----------------------------------------");
+		// System.out.println("_________________________________________");
+	}
+
 	/**
 	 * Gibt das Spielfeld als Array zurueck.
+	 * 
 	 * @return Spielfeld als Array
 	 */
 	public Spielobjekt[][] getSpielfeld() {
 		return spielfeld;
 	}
-	
+
 	/**
 	 * Setzt das Spielfeld auf neue Werte.
 	 * 
-	 * @param spielfeld Neues Spielfeld
+	 * @param spielfeld
+	 *            Neues Spielfeld
 	 */
 	public void setSpielfeld(Spielobjekt[][] spielfeld) {
 		this.spielfeld = spielfeld;
 	}
-	
-	
+
 	/**
-	 * Gibt das temporaere Spielfeld zurueck.
-	 * 
-     * @return Das temporaere Spielfeld
-     */
-    public Spielobjekt[][] getTempSpielfeld() {
-        return tempSpielfeld;
-    }
-
-    /**
-     * Setzt das temporaere Spielfeld.
-     * 
-     * @param tempSpielfeld Das zu setzende temporaere Spielfeld
-     */
-    public void setTempSpielfeld(Spielobjekt[][] tempSpielfeld) {
-        this.tempSpielfeld = tempSpielfeld;
-    }
-
-    /**
 	 * Gibt die aktuell gewaehlte Figur zurueck.
 	 * 
 	 * @return Gewaehlte Figur
@@ -220,11 +251,12 @@ public class Spielfeld {
 	public Figur getGewaehlteFigur() {
 		return gewaehlteFigur;
 	}
-	
+
 	/**
 	 * Setzt eine neue gewaehlte Figur fest.
 	 * 
-	 * @param gewaehlteFigur Neue gewaehlte Figur
+	 * @param gewaehlteFigur
+	 *            Neue gewaehlte Figur
 	 */
 	public void setGewaehlteFigur(Figur gewaehlteFigur) {
 		this.gewaehlteFigur = gewaehlteFigur;
