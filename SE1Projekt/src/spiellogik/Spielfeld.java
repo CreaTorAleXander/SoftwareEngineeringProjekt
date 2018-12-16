@@ -33,7 +33,6 @@ public class Spielfeld {
 	 */
 	void generiereHindernisse() {
 
-		List<Hindernis> h = new ArrayList<Hindernis>();
 		Random r = new Random();
 		int zeile = r.nextInt(2) + 1; // Zufallszahl 1..2, dient dazu den index der for-Schleife zu iterieren
 		int anzahlKleineH = 0; // Anz. der bereits gesetzten kleinen Hindernisse
