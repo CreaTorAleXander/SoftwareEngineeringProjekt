@@ -1,3 +1,4 @@
+package spiellogik;
 import java.util.*;
 
 import spielobjekte.Koordinate;
