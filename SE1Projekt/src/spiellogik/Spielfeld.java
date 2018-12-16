@@ -5,7 +5,7 @@ import java.util.*;
 import spielobjekte.*;
 
 /**
- * Klasse, die ein Spielfeld reprï¿½sentiert. Sie enthï¿½lt ein 2-dimensionales
+ * Klasse, die ein Spielfeld repraesentiert. Sie enthaelt ein 2-dimensionales
  * Array zur Darstellung der Spielobjekte.
  * 
  */
@@ -14,7 +14,7 @@ public class Spielfeld {
 	/** Spielobjekte des Spielfeldes */
 	Spielobjekt[][] spielfeld = new Spielobjekt[10][10];
 
-	/** Temporï¿½res Bewegungsspielfeld um Zï¿½ge vor Gegner zu verstecken */
+	/** Temporaeres Bewegungsspielfeld um Zuege vor Gegner zu verstecken */
 	Spielobjekt[][] tempSpielfeld = new Spielobjekt[10][10];
 
 	/** Ausgewaehlte Figur */
@@ -38,11 +38,11 @@ public class Spielfeld {
 		int anzahlKleineH = 0; // Anz. der bereits gesetzten kleinen Hindernisse
 		int anzahlGrosseH = 0; // Anz. der bereits gesetzten großen Hindernisse
 
-		// 5 Hindernisse, die zufällig 1 oder 2 Zeilen auseinander liegen (Spielfeld 10
+		// 5 Hindernisse, die zufaellig 1 oder 2 Zeilen auseinander liegen (Spielfeld 10
 		// Felder groß, 5 Hindernise => max. 2 Zeilen Abstand)
 		for (int i = r.nextInt(2); i < 10; i = i + zeile) {
 
-			int spalte = r.nextInt(8) + 1; // Zufällige Platzierung des Hindernisses in der Spalte
+			int spalte = r.nextInt(8) + 1; // Zufaellige Platzierung des Hindernisses in der Spalte
 			int hindernisart = r.nextInt(2); // Für Zufallswahl ob kleines oder großes Hindernis platziert werden soll
 
 			if (hindernisart == 1 && anzahlGrosseH >= 2) // Falls keine kleinen HIndernisse mehr übrig sind, soll ein
@@ -68,18 +68,6 @@ public class Spielfeld {
 
 			zeile = r.nextInt(2) + 1;
 
-			// Weitere if-Abfrage!!
-			/*
-			 * switch (hindernisart) { case 0: {
-			 * 
-			 * if (anzahlKleineH < 3) { spielfeld[i][spalte] = new Hindernis();
-			 * anzahlKleineH++; break; } } case 1: { if (anzahlGrosseH < 2) {
-			 * spielfeld[i][spalte] = new Hindernis(); spielfeld[i][spalte+1] = new
-			 * Hindernis(); anzahlGrosseH++; } }
-			 * 
-			 * }
-			 */
-
 		}
 
 	}
@@ -89,9 +77,9 @@ public class Spielfeld {
 	 */
 	void platziereFiguren(List<Figur> firstFiguren, List<Figur> secondFiguren) {
 		Random r = new Random();
-		// Wï¿½hlt per Zufallszahl eine der 5 Figuren
+		// Waehlt per Zufallszahl eine der 5 Figuren
 		int index = r.nextInt(5);
-		// Iteration ï¿½ber Startpositionen
+		// Iteration ueber Startpositionen
 		for (int i = 0; i < 10; i = i + 2) {
 			// Wenn Figur schon gesetzt, solange neue Zufallszahl bestimmen, bis..
 			while (firstFiguren.get(index).isWurdeGesetzt()) {
@@ -101,13 +89,13 @@ public class Spielfeld {
 			if (!firstFiguren.get(index).isWurdeGesetzt()) {
 				spielfeld[i][0] = firstFiguren.get(index);
 				firstFiguren.get(index).setWurdeGesetzt(true);
-				firstFiguren.get(index).setK1(new Koordinate(i, 0)); // = new Koordinate(0, i);
+				firstFiguren.get(index).setK1(new Koordinate(i, 0)); 
 			}
 		}
 
-		// Wï¿½hlt per Zufallszahl eine der 5 Figuren
+		// Waehlt per Zufallszahl eine der 5 Figuren
 		int index2 = r.nextInt(5);
-		// Iteration ï¿½ber Startpositionen
+		// Iteration ueber Startpositionen
 		for (int i = 1; i < 10; i = i + 2) {
 			// Wenn Figur schon gesetzt, solange neue Zufallszahl bestimmen, bis..
 			while (secondFiguren.get(index2).isWurdeGesetzt()) {
@@ -123,7 +111,7 @@ public class Spielfeld {
 	}
 
 	/**
-	 * Lï¿½sst Spieler eine Figur auswaehlen, welche in "gewaehlteFigur" gespeichert
+	 * Laesst Spieler eine Figur auswaehlen, welche in "gewaehlteFigur" gespeichert
 	 * wird.
 	 */
 	void waehleFigur(Koordinate wahl, Spieler player) {
@@ -134,7 +122,7 @@ public class Spielfeld {
 	}
 
 	/**
-	 * Lï¿½sst den Spieler eine Figur bewegen, die Bewegungen werden in einem extra
+	 * Laesst den Spieler eine Figur bewegen, die Bewegungen werden in einem extra
 	 * Spielfeld-Array gespeichert.
 	 * 
 	 * @param zuBewegen
@@ -155,11 +143,11 @@ public class Spielfeld {
 	}
 
 	/**
-	 * Ueberprueft, ob ein Spielzug mï¿½glich ist.
+	 * Ueberprueft, ob ein Spielzug moeglich ist.
 	 */
 	boolean pruefeBewegung(Koordinate ziel) {
 
-		// Wenn die Bewegung mï¿½glich ist von gewaehlterFigur aus
+		// Wenn die Bewegung moeglich ist von gewaehlterFigur aus
 		if (spielfeld[ziel.getX()][ziel.getY()] == null) {
 			if ((gewaehlteFigur).getK1().getX() - ziel.getX() <= gewaehlteFigur.getZugweite()
 					&& (gewaehlteFigur.getK1().getX() - ziel.getX()) >= -(gewaehlteFigur.getZugweite())) {
@@ -182,9 +170,8 @@ public class Spielfeld {
 		System.out.println("      1      2      3      4      5      6      7      8      9      10");
 		System.out.print("   _______________________________________________________________________");
 		for (int row = 0; row < 10; row++) {
-
 			System.out.println("");
-			// System.out.print("A");
+			//Zeile 1
 			for (int column = 0; column < 10; column++) {
 				if (column == 0)
 					System.out.print("   ");
@@ -196,6 +183,7 @@ public class Spielfeld {
 					System.out.print("|" + "XXXXXX");
 			}
 			System.out.print("|\n");
+			//Zeile 2
 			for (int column = 0; column < 10; column++) {
 				if (column == 0)
 					System.out.print((char) (row + 65) + "  ");
@@ -208,19 +196,18 @@ public class Spielfeld {
 
 			}
 			System.out.print("|\n");
+			//Zeile 3
 			for (int column = 0; column < 10; column++) {
 				if (column == 0)
 					System.out.print("   ");
-				System.out.print("|__" + "_" + "_" + "_" + "_");
-				// Hinderniss durch zusï¿½tzliche if-Abfrage einbauen?
-
+				if (spielfeld[row][column] == null || spielfeld[row][column] instanceof Figur)
+					System.out.print("|__" + "_" + "_" + "_" + "_");
+				if (spielfeld[row][column] instanceof Hindernis)
+					System.out.print("|" + "XXXXXX");
 			}
 			System.out.print("|");
-
 		}
 		System.out.println("");
-		// System.out.println("-----------------------------------------");
-		// System.out.println("_________________________________________");
 	}
 
 	/**
