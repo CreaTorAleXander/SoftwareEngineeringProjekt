@@ -19,4 +19,30 @@ public abstract class Spielobjekt {
 	public void setK1(Koordinate k1) {
 		this.k1 = k1;
 	}
+	
+	
+	/*
+	 * public abstract class Spielobjekt { 
+	 * 
+	 * private Koordinate koordinate;
+	 * 
+	 * public Spielobjekt(Koordinate koordinate) {
+	 * 
+	 * this.koordinate = koordinate; 
+	 * }
+	 * 
+	 * public Koordinate getKoordinate() { 
+	 * 	return koordinate; 
+	 * }
+	 * 
+	 * public void setKoordinate(Koordinate koordinate) { this.koordinate =
+	 * koordinate; }
+	 * 
+	 * public String toString() {
+	 * 
+	 * return null; } }
+	 */
+	
+	
+	
 }
