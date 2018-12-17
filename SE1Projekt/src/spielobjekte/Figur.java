@@ -1,5 +1,10 @@
 package spielobjekte;
 
+import java.util.List;
+import java.util.Set;
+
+import spiellogik.Spielfeld;
+
 /**
  * Eine abstrakte Klasse, die eine Figur repraesentiert.
  * 
@@ -43,10 +48,10 @@ public abstract class Figur extends Spielobjekt {
      */
     private int id;
 
-    /**
-     * Die Koordinaten der Figur auf dem Spielfeld.
-     */
-    private Koordinate koordinaten;
+//    /**
+//     * Die Koordinaten der Figur auf dem Spielfeld.
+//     */
+//    private Koordinate koordinaten;
 
     /**
      * Zu Vererbungszwecken implementiert.
@@ -208,5 +213,14 @@ public abstract class Figur extends Spielobjekt {
         System.out.print("|HP: " + leben + " ");
 
     }
+
+    /**
+     * Bestimmt die potentiellen Positionen zum Angreifen der Figur ausgehend von
+     * ihrer aktuellen Position.
+     * 
+     * @return Eine Menge von Koordinaten der potentiellen Positionen zum Angreifen
+     *         der Figur
+     */
+    public abstract Set<Koordinate> bestimmePotAngriffsPos(Spielfeld spielfeld);
 
 }
