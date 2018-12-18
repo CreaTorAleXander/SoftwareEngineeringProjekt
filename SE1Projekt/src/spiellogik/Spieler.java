@@ -1,8 +1,10 @@
 package spiellogik;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashSet;
+
 import java.util.List;
+import java.util.Set;
 
 import spielobjekte.Bogenschuetze;
 import spielobjekte.Figur;
@@ -72,152 +74,28 @@ public class Spieler {
      * 
      * @return Liste an Figuren, deren Figuren jeweils angreifen koennen
      */
-    /*
-    public List<Figur> filtereAngriffsFaehigeFiguren(List<Figur> figuren, Spielfeld spielfeld) {
-
-        List<Figur> gefilterteFigurenListe = new LinkedList<>();
-
-        for (Figur figur : figuren) {
-
-            if (figur instanceof Schwertkaempfer) {
-
-                // Kontrolliere geradlinigen Angrifffsmoeglichkeiten
-                if (spielfeld.getSpielfeld()[figur.getK1().getX() + 1][figur.getK1().getY()] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX() + 1][figur.getK1().getY()] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX() + 1][figur.getK1()
-                                .getY()]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX() - 1][figur.getK1().getY()] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX() - 1][figur.getK1().getY()] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX() - 1][figur.getK1()
-                                .getY()]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX()][figur.getK1().getY() + 1] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX()][figur.getK1().getY() + 1] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX()][figur.getK1().getY()
-                                + 1]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX()][figur.getK1().getY() - 1] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX()][figur.getK1().getY() - 1] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX()][figur.getK1().getY()
-                                - 1]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                // Kontrolliere diagonale Angriffsmoeglichkeiten
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX() + 1][figur.getK1().getY() + 1] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX() + 1][figur.getK1().getY() + 1] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX() + 1][figur.getK1()
-                                .getY() + 1]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX() - 1][figur.getK1().getY() + 1] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX() - 1][figur.getK1().getY() + 1] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX() - 1][figur.getK1()
-                                .getY() + 1]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX() + 1][figur.getK1().getY() - 1] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX() + 1][figur.getK1().getY() - 1] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX() + 1][figur.getK1()
-                                .getY() - 1]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX() - 1][figur.getK1().getY() - 1] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX() - 1][figur.getK1().getY() - 1] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX() - 1][figur.getK1()
-                                .getY() - 1]).getId())
-                    gefilterteFigurenListe.add(figur);
-            }
-
-            else if (figur instanceof Lanzentraeger) {
-
-                // Kontrolle Angriffsmoeglichkeiten nach rechts
-                if (spielfeld.getSpielfeld()[figur.getK1().getX() + 2][figur.getK1().getY()] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX() + 2][figur.getK1().getY()] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX() + 2][figur.getK1()
-                                .getY()]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX() + 2][figur.getK1().getY() + 1] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX() + 2][figur.getK1().getY() + 1] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX() + 2][figur.getK1()
-                                .getY() + 1]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX() + 2][figur.getK1().getY() - 1] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX() + 2][figur.getK1().getY() - 1] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX() + 2][figur.getK1()
-                                .getY() - 1]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                // Kontrolle Angriffsmoeglichkeiten nach links
-
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX() - 2][figur.getK1().getY()] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX() - 2][figur.getK1().getY()] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX() - 2][figur.getK1()
-                                .getY()]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX() - 2][figur.getK1().getY() + 1] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX() - 2][figur.getK1().getY() + 1] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX() - 2][figur.getK1()
-                                .getY() + 1]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX() - 2][figur.getK1().getY() - 1] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX() - 2][figur.getK1().getY() - 1] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX() - 2][figur.getK1()
-                                .getY() - 1]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                // Kontrolle Angriffsmoeglichkeiten nach oben
-
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX()][figur.getK1().getY() + 2] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX()][figur.getK1().getY() + 2] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX()][figur.getK1().getY()
-                                + 2]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX() + 1][figur.getK1().getY() + 2] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX() + 1][figur.getK1().getY() + 2] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX() + 1][figur.getK1()
-                                .getY() + 2]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX() - 1][figur.getK1().getY() + 2] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX() - 1][figur.getK1().getY() + 2] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX() - 1][figur.getK1()
-                                .getY() + 2]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                // Kontrolle Angriffsmoeglichkeiten nach unten
-
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX()][figur.getK1().getY() - 2] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX()][figur.getK1().getY() - 2] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX()][figur.getK1().getY()
-                                - 2]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX() - 1][figur.getK1().getY() - 2] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX() - 1][figur.getK1().getY() - 2] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX() - 1][figur.getK1()
-                                .getY() - 2]).getId())
-                    gefilterteFigurenListe.add(figur);
-
-                else if (spielfeld.getSpielfeld()[figur.getK1().getX() + 1][figur.getK1().getY() - 2] != null
-                        && spielfeld.getSpielfeld()[figur.getK1().getX() + 1][figur.getK1().getY() - 2] instanceof Figur
-                        && figur.getId() != ((Figur) spielfeld.getSpielfeld()[figur.getK1().getX() + 1][figur.getK1()
-                                .getY() - 2]).getId())
-                    gefilterteFigurenListe.add(figur);
-            }
-            
-            else if(figur instanceof Bogenschuetze) {
-                
-            }
+    public Set<Figur> filtereAngriffsFaehigeFiguren(List<Figur> figuren, Spielfeld spielfeld) {
+       
+        Set<Figur> gefilterteFigurenListe = new HashSet<>();
+        
+        // Fuegt alle Figuren des Spielers, derene Menge an Angriffspositionen nicht leer ist
+        // zu der Menge der angriffsfaehigen Figuren hinzu.
+        for(Figur figur: this.getFiguren()) {
+            if(!figur.bestimmePotAngriffsPos(spielfeld).isEmpty())
+                gefilterteFigurenListe.add(figur);
         }
+        
+        return gefilterteFigurenListe;
+    }
+    
+    /**
+     * Nimmt die Angriffszuege auf, die der Spieler in dieser Angriffsphase durchfuehren moechte.
+     * 
+     * @param spielfeld Das zu betrachtende Spielfeld
+     */
+    /*
+    public void nehmeAngriffsInfoAuf(Spielfeld spielfeld) {
+        
     }
     */
 }
