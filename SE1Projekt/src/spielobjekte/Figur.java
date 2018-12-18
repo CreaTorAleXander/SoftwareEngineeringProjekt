@@ -3,6 +3,7 @@ package spielobjekte;
 import java.util.List;
 import java.util.Set;
 
+import spiellogik.Spieler;
 import spiellogik.Spielfeld;
 
 /**
@@ -48,10 +49,6 @@ public abstract class Figur extends Spielobjekt {
      */
     private int id;
 
-//    /**
-//     * Die Koordinaten der Figur auf dem Spielfeld.
-//     */
-//    private Koordinate koordinaten;
 
     /**
      * Zu Vererbungszwecken implementiert.
@@ -59,9 +56,10 @@ public abstract class Figur extends Spielobjekt {
      * @param leben    Das Leben der Figur
      * @param zugweite Die Zugweite der Figur
      */
-    protected Figur(int leben, int zugweite) {
+    protected Figur(int leben, int zugweite, int id) {
         this.setLeben(leben);
         this.setZugweite(zugweite);
+        this.setId(id);
     }
 
     /**

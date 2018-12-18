@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import spiellogik.Spieler;
 import spiellogik.Spielfeld;
 
 /**
@@ -22,10 +23,10 @@ public class Reiter extends Figur {
      * Erzeugung eines neuen Objekts mit 2 Leben, der Zugweite 3 und der Abkuerzung
      * REI als Namen.
      */
-    public Reiter(int id) {
-        super(2, 3);
+    public Reiter() {
+        super(2, 3, Spieler.anzahlSpieler);
         this.setName(Abkuerzung.REI);
-        this.setId(id);
+        
     }
 
     public String toString() {

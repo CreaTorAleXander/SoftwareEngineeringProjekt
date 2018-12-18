@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import spiellogik.Spieler;
 import spiellogik.Spielfeld;
 
 /**
@@ -21,10 +22,9 @@ public class Lanzentraeger extends Figur {
      * Erzeugung eines neuen Objekts mit 1 Leben, der Zugweite 1 und mit der
      * Abkuerzung LAT als Namen.
      */
-    public Lanzentraeger(int id) {
-        super(1, 1);
+    public Lanzentraeger() {
+        super(1, 1, Spieler.anzahlSpieler);
         this.setName(Abkuerzung.LAT);
-        this.setId(id);
     }
 
     public String toString() {

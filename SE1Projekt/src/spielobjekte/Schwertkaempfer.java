@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import spiellogik.Spieler;
 import spiellogik.Spielfeld;
 
 /**
@@ -22,10 +23,9 @@ public class Schwertkaempfer extends Figur {
      * Erzeugung eines neuen Objekts Schwertkaempfer mit 3 Leben, der Zugweite 1 und
      * der Abkuerzung SWL als Namen.
      */
-    public Schwertkaempfer(int id) {
-        super(3, 1);
+    public Schwertkaempfer() {
+        super(3, 1, Spieler.anzahlSpieler);
         this.setName(Abkuerzung.SWK);
-        this.setId(id);
     }
 
     public String toString() {

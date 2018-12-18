@@ -3,6 +3,7 @@ package spielobjekte;
 import java.util.HashSet;
 import java.util.Set;
 
+import spiellogik.Spieler;
 import spiellogik.Spielfeld;
 
 /**
@@ -20,10 +21,9 @@ public class Magier extends Figur {
      * Erzeugung eines neuen Objekts mit 1 Leben, der Zugweite 2 und der Abkuerzung
      * MAG als Namen.
      */
-    public Magier(int id) {
-        super(1, 2);
+    public Magier() {
+        super(1, 2, Spieler.anzahlSpieler);
         this.setName(Abkuerzung.MAG);
-        this.setId(id);
     }
 
     public String toString() {

@@ -36,11 +36,11 @@ public class Spieler {
      */
     public Spieler() {
         anzahlSpieler++;
-        this.figuren.add(new Reiter(Spieler.anzahlSpieler));
-        this.figuren.add(new Schwertkaempfer(Spieler.anzahlSpieler));
-        this.figuren.add(new Magier(Spieler.anzahlSpieler));
-        this.figuren.add(new Bogenschuetze(Spieler.anzahlSpieler));
-        this.figuren.add(new Lanzentraeger(Spieler.anzahlSpieler));
+        this.figuren.add(new Reiter());
+        this.figuren.add(new Schwertkaempfer());
+        this.figuren.add(new Magier());
+        this.figuren.add(new Bogenschuetze());
+        this.figuren.add(new Lanzentraeger());
     }
 
     /**

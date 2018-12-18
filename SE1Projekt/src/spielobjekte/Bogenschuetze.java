@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import spiellogik.Spieler;
 import spiellogik.Spielfeld;
 
 /**
@@ -21,10 +22,9 @@ public class Bogenschuetze extends Figur {
      * Erzeugung eines neuen Objekts mit 1 Leben, der Zugweite 2 und mit der
      * Abkuerzung BOG als Namen.
      */
-    public Bogenschuetze(int id) {
-        super(1, 2);
+    public Bogenschuetze() {
+        super(1, 2, Spieler.anzahlSpieler);
         this.setName(Abkuerzung.BOG);
-        this.setId(id);
     }
 
     public String toString() {
