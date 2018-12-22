@@ -1,4 +1,5 @@
 package spielobjekte;
+
 /**
  * Eine Klasse die Koordinaten auf dem Spielfeld simulieren soll
  * 
@@ -6,56 +7,58 @@ package spielobjekte;
  *
  */
 public class Koordinate {
-	private int x;
-	private int y;
-	
-	/**
-	 * Der Konstruktor
-	 * 
-	 * @param x x-Koordinate
-	 * @param y	y-Koordinate
-	 */
-	public Koordinate(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
-	
-	/**
-	 * Getter der x-Koordiante
-	 * 
-	 * @return x Koordinate
-	 */
-	public int getX() {
-		return x;
-	}
+    private int x;
+    private int y;
 
-	/**
-	 * �berschreibt die x-Koordinate
-	 * 
-	 * @param y
-	 */
-	public void setX(int x) {
-		this.x = x;
-	}
-	
+    // Hier entspricht aber die Instanzvariable x dem eigentlichen y Wert(den
+    // Buchstaben auf dem Spielfeld, also den Zeilen),
+    // die Instanzvariable y dem eigentlichen x Wert (den Zahlen, also den Spalten
+    // auf dem Spielfeld)
+    /**
+     * Der Konstruktor
+     * 
+     * @param x x-Koordinate
+     * @param y y-Koordinate
+     */
+    public Koordinate(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
 
-	/**
-	 * Getter der y-Koordiante
-	 * 
-	 * @return y Koordinate
-	 */
-	public int getY() {
-		return y;
-	}
+    /**
+     * Getter der x-Koordiante
+     * 
+     * @return x Koordinate
+     */
+    public int getX() {
+        return x;
+    }
 
-	/**
-	 * �berschreibt die y-Koordinate
-	 * 
-	 * @param y
-	 */
-	public void setY(int y) {
-		this.y = y;
-	}
+    /**
+     * �berschreibt die x-Koordinate
+     * 
+     * @param y
+     */
+    public void setX(int x) {
+        this.x = x;
+    }
 
-	
+    /**
+     * Getter der y-Koordiante
+     * 
+     * @return y Koordinate
+     */
+    public int getY() {
+        return y;
+    }
+
+    /**
+     * �berschreibt die y-Koordinate
+     * 
+     * @param y
+     */
+    public void setY(int y) {
+        this.y = y;
+    }
+
 }
