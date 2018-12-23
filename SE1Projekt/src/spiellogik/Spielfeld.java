@@ -113,12 +113,16 @@ public class Spielfeld {
 	/**
 	 * Laesst Spieler eine Figur auswaehlen, welche in "gewaehlteFigur" gespeichert
 	 * wird.
+	 * 
+	 * @exception InputMismatchException wenn sich an der Koordinate keine eigene Figur befindet
 	 */
 	void waehleFigur(Koordinate wahl, Spieler player) {
 		// Figur nur w�hlen, wenn in eigener Liste vorhanden
 		if (player.getFiguren().contains(spielfeld[wahl.getX()][wahl.getY()]))
 			gewaehlteFigur = (Figur) spielfeld[wahl.getX()][wahl.getY()];
 		// else: Exception kann geworfen werden und in der Spiel-main gehandlet werden
+		else
+			throw new InputMismatchException("Hier befindet sich keine eigene Figur!");
 	}
 
 	/**
