@@ -2,7 +2,6 @@ package spielobjekte;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import spiellogik.Spieler;
 import spiellogik.Spielfeld;
 
