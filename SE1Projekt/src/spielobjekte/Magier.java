@@ -109,5 +109,6 @@ public class Magier extends Figur {
         }
 
         return positionen;
+        
     }
 }

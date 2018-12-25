@@ -179,6 +179,7 @@ public class Reiter extends Figur {
         		positionen.add(new Koordinate(xFigur, i));
         }
         
+        
     	return positionen;
     }
 }

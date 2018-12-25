@@ -175,5 +175,4 @@ public class Lanzentraeger extends Figur {
         return positionen;
 
     }
-
 }

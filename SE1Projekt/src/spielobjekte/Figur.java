@@ -265,6 +265,7 @@ public abstract class Figur extends Spielobjekt {
      				positionen.add(new Koordinate(i, j));
      		}
      	}
+     	
      	return positionen;
     }
 }

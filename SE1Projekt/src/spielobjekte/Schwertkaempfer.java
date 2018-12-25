@@ -133,6 +133,5 @@ public class Schwertkaempfer extends Figur {
         
         return positionen;
     }
-    
 
 }

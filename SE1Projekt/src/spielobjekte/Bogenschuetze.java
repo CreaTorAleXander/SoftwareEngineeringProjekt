@@ -217,6 +217,7 @@ public class Bogenschuetze extends Figur {
             innerhalbFeld = false;
         }
         
+        
         return positionen;
 
     }
