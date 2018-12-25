@@ -1,8 +1,6 @@
 package spielobjekte;
 
 import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
 import spiellogik.Spieler;
@@ -134,5 +132,53 @@ public class Reiter extends Figur {
         }
 
         return positionen;
+    }
+    
+    public Set<Koordinate> bestimmePotZuege(Spielfeld spielfeld) {
+    	Set<Koordinate> positionen = new HashSet<>();
+        int xFigur = this.getK1().getX();
+        int yFigur = this.getK1().getY();
+        Spielobjekt[][] feld = spielfeld.getSpielfeld();
+        
+        //Ausgehend von der Position des Reiters, muss in alle 4 Himmelsrichtungen gelaufen werden.
+        //Jede for-Schleife hat zwei Abbruchbedingungen:
+        //1.Abbruchbedingung: maximale Zugweite des Reiters
+        //2. Abbruchbedingung: Rand des Spielfeldes
+        //Desweiteren kann der Reiter Hindernisse/andere Figuren nicht umgehen. Wird sein
+        //Weg also versperrt, muss die Schleife verlassen werden.
+        
+        //Norden
+        for(int i = xFigur; i >= xFigur-this.getZugweite() && i >= 0; i--) {
+        	if (feld[i][yFigur] != null)
+        		break;
+        	else
+        		positionen.add(new Koordinate(i, yFigur));
+        }
+        
+        //Süden
+        for(int i = xFigur; i <= xFigur+this.getZugweite() && i < 10; i++) {
+        	if(feld[i][yFigur] != null)
+        		break;
+        	else
+        		positionen.add(new Koordinate(i, yFigur));
+        }
+    	
+        //Westen
+        for(int i = yFigur; i >= yFigur-this.getZugweite() && i >= 0; i--) {
+        	if(feld[xFigur][i] != null)
+        		break;
+        	else
+        		positionen.add(new Koordinate(xFigur, i));
+        }
+        
+        //Osten
+        for(int i = yFigur; i <= yFigur+this.getZugweite() && i < 10; i++) {
+        	if(feld[xFigur][i] != null)
+        		break;
+        	else
+        		positionen.add(new Koordinate(xFigur, i));
+        }
+        
+    	return positionen;
     }
 }
