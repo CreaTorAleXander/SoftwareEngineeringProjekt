@@ -140,8 +140,10 @@ public class Spieler {
            
            // ob die Figur, die der User auswaehlt existiert und angreifen kann
            boolean existiertGewaehlteFigur = false;
+           // ob das gewaehlte Angriffsziel gueltig ist
+           boolean gueltigesAngriffsziel = false;
            
-           while(!existiertGewaehlteFigur) {
+           while((!existiertGewaehlteFigur) || (!gueltigesAngriffsziel)) {
                
                if((feld[zeilenKoordinate][spaltenKoordinate] instanceof Figur) && angriffsFaehigeFiguren.contains(feld[zeilenKoordinate][spaltenKoordinate])) {
                    
@@ -156,9 +158,19 @@ public class Spieler {
                    
                    Koordinate angriffsZiel = new Koordinate(angriffZeilenKoordinate, angriffSpaltenKoordinate);
                    
+                   if(gewaehlteFigur.bestimmePotAngriffsPos(spielfeld).contains(angriffsZiel)) {
+                       
+                       gueltigesAngriffsziel = true;
+                   }
+                   
+                   else if(!(gewaehlteFigur.bestimmePotAngriffsPos(spielfeld).contains(angriffsZiel))) {
+                       
+                       System.out.println("Dies ist keine gültige Koordinate als Angriffsziel. Bitte geben sie eine gültige Koordinate ein.");
+                   }
+                   
                    boolean gueltigeAngriffshaltung = false;
                    
-                   while(!gueltigeAngriffshaltung) {
+                   while(!gueltigeAngriffshaltung && existiertGewaehlteFigur && gueltigesAngriffsziel) {
                        
                        System.out.println("Bitte wählen sie ihre Angriffshaltung für diese Figur aus (Schere, Stein, Papier)");
                        String haltung = in.next().toLowerCase();
