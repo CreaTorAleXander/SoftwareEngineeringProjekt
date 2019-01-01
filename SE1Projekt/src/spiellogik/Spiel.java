@@ -18,7 +18,7 @@ public class Spiel {
 	private static Spieler spieler2;
 	
 	/**
-	 * Leitet den Spielbeginn ein. Keine weiteren Maßnahmen für den Spielfluss erforderlich.
+	 * Leitet den Spielbeginn ein. Keine weiteren Maï¿½nahmen fï¿½r den Spielfluss erforderlich.
 	 * 
 	 * @throws IOException durch Konsoleneingabe bei "starteRunde()"
 	 */
@@ -32,7 +32,7 @@ public class Spiel {
 	
 	/**
 	 * Started eine Runde, in der sowohl Spieler 1, als auch Spieler 2
-	 * ihren Zug machen können.
+	 * ihren Zug machen kï¿½nnen.
 	 * 
 	 * @throws IOException durch Konsoleneingabe bei "zugDesSpielers(spieler)"
 	 */
@@ -81,7 +81,7 @@ public class Spiel {
 					}
 				} while (!isFigur);
 
-				//Zurücksetzen der Koordinate
+				//Zurï¿½cksetzen der Koordinate
 				k1 = new Koordinate(-1, -1);
 				
 				//Angabe wohin die Figur bewegt werden soll.
@@ -90,12 +90,12 @@ public class Spiel {
 					do {
 						k1 = konvertiereEingabe2(scanner.next());
 					} while (k1.getX() == (-1));
-					//Überprüfung, ob der Zug möglich ist
+					//ï¿½berprï¿½fung, ob der Zug mï¿½glich ist
 					if (spielfeld.pruefeBewegung(k1)) {
 						isZugMoeglich = true;
 						spielfeld.bewegeFigur(k1);
 					} else {
-						System.err.println("Zug nicht möglich");
+						System.err.println("Zug nicht mï¿½glich");
 					}
 				} while (!isZugMoeglich);
 				
@@ -128,7 +128,7 @@ public class Spiel {
 //					isZugMoeglich = true;
 //					spielfeld.bewegeFigur(k1);
 //				} else {
-//					System.err.println("Zug nicht möglich");
+//					System.err.println("Zug nicht mï¿½glich");
 //				}
 //			} while (!isZugMoeglich);
 //		}
@@ -205,7 +205,7 @@ public class Spiel {
 	 * @param input Eingabestring
 	 * @return Koordinatenwert einer Achse
 	 */
-	private static Koordinate konvertiereEingabe2(String input) {
+	public static Koordinate konvertiereEingabe2(String input) {
 		Koordinate koordinate = new Koordinate(-1,-1);
 		switch (input.toUpperCase()) {
 		
@@ -286,7 +286,7 @@ public class Spiel {
 	}
 
 	/**
-	 * Prüft auf das Ende des Spiels (Keine Figuren mehr vorhanden)
+	 * Prï¿½ft auf das Ende des Spiels (Keine Figuren mehr vorhanden)
 	 * 
 	 * @return true wenn ein Spieler keine Figuren mehr besitzt
 	 */

@@ -23,7 +23,7 @@ public class Spielfeld {
 	/**
 	 * Platziert Objekte auf dem Spielfeld
 	 */
-	void platziereObjekte(List<Figur> firstFiguren, List<Figur> secondFiguren) {
+	public void platziereObjekte(List<Figur> firstFiguren, List<Figur> secondFiguren) {
 		this.generiereHindernisse();
 		this.platziereFiguren(firstFiguren, secondFiguren);
 	}
@@ -36,20 +36,20 @@ public class Spielfeld {
 		Random r = new Random();
 		int zeile = r.nextInt(2) + 1; // Zufallszahl 1..2, dient dazu den index der for-Schleife zu iterieren
 		int anzahlKleineH = 0; // Anz. der bereits gesetzten kleinen Hindernisse
-		int anzahlGrosseH = 0; // Anz. der bereits gesetzten großen Hindernisse
+		int anzahlGrosseH = 0; // Anz. der bereits gesetzten groï¿½en Hindernisse
 
 		// 5 Hindernisse, die zufaellig 1 oder 2 Zeilen auseinander liegen (Spielfeld 10
-		// Felder groß, 5 Hindernise => max. 2 Zeilen Abstand)
+		// Felder groï¿½, 5 Hindernise => max. 2 Zeilen Abstand)
 		for (int i = r.nextInt(2); i < 10; i = i + zeile) {
 
 			int spalte = r.nextInt(8) + 1; // Zufaellige Platzierung des Hindernisses in der Spalte
-			int hindernisart = r.nextInt(2); // Für Zufallswahl ob kleines oder großes Hindernis platziert werden soll
+			int hindernisart = r.nextInt(2); // Fï¿½r Zufallswahl ob kleines oder groï¿½es Hindernis platziert werden soll
 
-			if (hindernisart == 1 && anzahlGrosseH >= 2) // Falls keine kleinen HIndernisse mehr übrig sind, soll ein
-															// großes platziert werden
+			if (hindernisart == 1 && anzahlGrosseH >= 2) // Falls keine kleinen HIndernisse mehr ï¿½brig sind, soll ein
+															// groï¿½es platziert werden
 				hindernisart = 0;
 
-			if (hindernisart == 0 && anzahlKleineH >= 3) // Falls keine großen Hindernisse mehr übrig sind, soll ein
+			if (hindernisart == 0 && anzahlKleineH >= 3) // Falls keine groï¿½en Hindernisse mehr ï¿½brig sind, soll ein
 															// kleines platziert werden
 				hindernisart = 1;
 
@@ -58,7 +58,7 @@ public class Spielfeld {
 				anzahlKleineH++;
 			}
 
-			else if (hindernisart == 1 && anzahlGrosseH < 2) { // Platzieren eines großen Hindernisses
+			else if (hindernisart == 1 && anzahlGrosseH < 2) { // Platzieren eines groï¿½en Hindernisses
 				if (spalte == 8)
 					spalte--;
 				spielfeld[i][spalte] = new Hindernis();
@@ -116,7 +116,7 @@ public class Spielfeld {
 	 * 
 	 * @exception InputMismatchException wenn sich an der Koordinate keine eigene Figur befindet
 	 */
-	void waehleFigur(Koordinate wahl, Spieler player) {
+	public void waehleFigur(Koordinate wahl, Spieler player) {
 		// Figur nur wï¿½hlen, wenn in eigener Liste vorhanden
 		if (player.getFiguren().contains(spielfeld[wahl.getX()][wahl.getY()]))
 			gewaehlteFigur = (Figur) spielfeld[wahl.getX()][wahl.getY()];
@@ -131,7 +131,7 @@ public class Spielfeld {
 	 * 
 	 * @param zuBewegen
 	 */
-	void bewegeFigur(Koordinate ziel) {
+	public void bewegeFigur(Koordinate ziel) {
 		if (pruefeBewegung(ziel)) {
 			// Figur verschieben
 			spielfeld[ziel.getX()][ziel.getY()] = gewaehlteFigur;
@@ -149,7 +149,7 @@ public class Spielfeld {
 	/**
 	 * Ueberprueft, ob ein Spielzug moeglich ist.
 	 */
-	boolean pruefeBewegung(Koordinate ziel) {
+	public boolean pruefeBewegung(Koordinate ziel) {
 
 		// Wenn die Bewegung moeglich ist von gewaehlterFigur aus
 		if (spielfeld[ziel.getX()][ziel.getY()] == null) {
@@ -170,7 +170,7 @@ public class Spielfeld {
 	/**
 	 * Gibt das Aktuelle Spielfeld auf der Konsole aus.
 	 */
-	void printSpielfeld() {
+	public void printSpielfeld() {
 		System.out.println("      1      2      3      4      5      6      7      8      9      10");
 		System.out.print("   _______________________________________________________________________");
 		for (int row = 0; row < 10; row++) {

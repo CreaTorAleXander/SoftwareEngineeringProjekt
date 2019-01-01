@@ -51,9 +51,11 @@ public class Reiter extends Figur {
                 && (this.getId() != ((Figur) feld[xWert - 1][yWert]).getId())) {
 
             positionen.add(new Koordinate(xWert - 1, yWert));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 2 Position
         if (((xWert - 1) >= 0) && ((xWert - 1) < feld.length) && ((yWert - 1) >= 0) && ((yWert - 1) < feld[0].length))
             innerhalbFeld = true;
@@ -62,9 +64,11 @@ public class Reiter extends Figur {
                 && (this.getId() != ((Figur) feld[xWert - 1][yWert - 1]).getId())) {
 
             positionen.add(new Koordinate(xWert - 1, yWert - 1));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 3 Position
         if (((xWert - 1) >= 0) && ((xWert - 1) < feld.length) && ((yWert + 1) >= 0) && ((yWert + 1) < feld[0].length))
             innerhalbFeld = true;
@@ -73,9 +77,11 @@ public class Reiter extends Figur {
                 && (this.getId() != ((Figur) feld[xWert - 1][yWert + 1]).getId())) {
 
             positionen.add(new Koordinate(xWert - 1, yWert + 1));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 4 Position
         if ((xWert >= 0) && (xWert < feld.length) && ((yWert - 1) >= 0) && ((yWert - 1) < feld[0].length))
             innerhalbFeld = true;
@@ -84,9 +90,11 @@ public class Reiter extends Figur {
                 && (this.getId() != ((Figur) feld[xWert][yWert - 1]).getId())) {
 
             positionen.add(new Koordinate(xWert, yWert - 1));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 5 Position
         if ((xWert >= 0) && (xWert < feld.length) && ((yWert + 1) >= 0) && ((yWert + 1) < feld[0].length))
             innerhalbFeld = true;
@@ -95,9 +103,11 @@ public class Reiter extends Figur {
                 && (this.getId() != ((Figur) feld[xWert][yWert + 1]).getId())) {
 
             positionen.add(new Koordinate(xWert, yWert + 1));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 6 Position
         if (((xWert + 1) >= 0) && ((xWert + 1) < feld.length) && (yWert >= 0) && (yWert < feld[0].length))
             innerhalbFeld = true;
@@ -106,9 +116,11 @@ public class Reiter extends Figur {
                 && (this.getId() != ((Figur) feld[xWert + 1][yWert]).getId())) {
 
             positionen.add(new Koordinate(xWert + 1, yWert));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 7 Position
         if (((xWert + 1) >= 0) && ((xWert + 1) < feld.length) && ((yWert - 1) >= 0) && ((yWert - 1) < feld[0].length))
             innerhalbFeld = true;
@@ -117,9 +129,11 @@ public class Reiter extends Figur {
                 && (this.getId() != ((Figur) feld[xWert + 1][yWert - 1]).getId())) {
 
             positionen.add(new Koordinate(xWert + 1, yWert - 1));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 8 Position
         if (((xWert + 1) >= 0) && ((xWert + 1) < feld.length) && ((yWert + 1) >= 0) && ((yWert + 1) < feld[0].length))
             innerhalbFeld = true;
@@ -128,9 +142,11 @@ public class Reiter extends Figur {
                 && (this.getId() != ((Figur) feld[xWert + 1][yWert + 1]).getId())) {
 
             positionen.add(new Koordinate(xWert + 1, yWert + 1));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         return positionen;
     }
     
@@ -155,7 +171,7 @@ public class Reiter extends Figur {
         		positionen.add(new Koordinate(i, yFigur));
         }
         
-        //Süden
+        //Sï¿½den
         for(int i = xFigur; i <= xFigur+this.getZugweite() && i < 10; i++) {
         	if(feld[i][yFigur] != null)
         		break;

@@ -48,9 +48,11 @@ public class Lanzentraeger extends Figur {
                 && (this.getId() != ((Figur) feld[xWert][yWert + 2]).getId())) {
 
             positionen.add(new Koordinate(xWert, yWert + 2));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 2 Position
         if (((xWert - 1) >= 0) && ((xWert - 1) < feld.length) && ((yWert + 2) >= 0) && ((yWert + 2) < feld[0].length))
             innerhalbFeld = true;
@@ -59,9 +61,11 @@ public class Lanzentraeger extends Figur {
                 && (this.getId() != ((Figur) feld[xWert - 1][yWert + 2]).getId())) {
 
             positionen.add(new Koordinate(xWert - 1, yWert + 2));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 3 Position
         if (((xWert + 1) >= 0) && ((xWert + 1) < feld.length) && ((yWert + 2) >= 0) && ((yWert + 2) < feld[0].length))
             innerhalbFeld = true;
@@ -70,9 +74,11 @@ public class Lanzentraeger extends Figur {
                 && (this.getId() != ((Figur) feld[xWert + 1][yWert + 2]).getId())) {
 
             positionen.add(new Koordinate(xWert + 1, yWert + 2));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 4 Position
         if (((xWert - 2) >= 0) && ((xWert - 2) < feld.length) && (yWert >= 0) && (yWert < feld[0].length))
             innerhalbFeld = true;
@@ -81,9 +87,11 @@ public class Lanzentraeger extends Figur {
                 && (this.getId() != ((Figur) feld[xWert - 2][yWert]).getId())) {
 
             positionen.add(new Koordinate(xWert - 2, yWert));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 5 Position
         if (((xWert - 2) >= 0) && ((xWert - 2) < feld.length) && ((yWert - 1) >= 0) && ((yWert - 1) < feld[0].length))
             innerhalbFeld = true;
@@ -92,9 +100,11 @@ public class Lanzentraeger extends Figur {
                 && (this.getId() != ((Figur) feld[xWert - 2][yWert - 1]).getId())) {
 
             positionen.add(new Koordinate(xWert - 2, yWert - 1));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 6 Position
         if (((xWert - 2) >= 0) && ((xWert - 2) < feld.length) && ((yWert + 1) >= 0) && ((yWert + 1) < feld[0].length))
             innerhalbFeld = true;
@@ -103,9 +113,11 @@ public class Lanzentraeger extends Figur {
                 && (this.getId() != ((Figur) feld[xWert - 2][yWert + 1]).getId())) {
 
             positionen.add(new Koordinate(xWert - 2, yWert + 1));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 7 Position
         if (((xWert + 2) >= 0) && ((xWert + 2) < feld.length) && (yWert >= 0) && (yWert < feld[0].length))
             innerhalbFeld = true;
@@ -114,9 +126,11 @@ public class Lanzentraeger extends Figur {
                 && (this.getId() != ((Figur) feld[xWert + 2][yWert]).getId())) {
 
             positionen.add(new Koordinate(xWert + 2, yWert));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 8 Position
         if (((xWert + 2) >= 0) && ((xWert + 2) < feld.length) && ((yWert + 1) >= 0) && ((yWert + 1) < feld[0].length))
             innerhalbFeld = true;
@@ -125,9 +139,11 @@ public class Lanzentraeger extends Figur {
                 && (this.getId() != ((Figur) feld[xWert + 2][yWert + 1]).getId())) {
 
             positionen.add(new Koordinate(xWert + 2, yWert + 1));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 9 Position
         if (((xWert + 2) >= 0) && ((xWert + 2) < feld.length) && ((yWert - 1) >= 0) && ((yWert - 1) < feld[0].length))
             innerhalbFeld = true;
@@ -136,9 +152,11 @@ public class Lanzentraeger extends Figur {
                 && (this.getId() != ((Figur) feld[xWert + 2][yWert - 1]).getId())) {
 
             positionen.add(new Koordinate(xWert + 2, yWert - 1));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 10 Position
         if (((xWert - 1) >= 0) && ((xWert - 1) < feld.length) && ((yWert - 2) >= 0) && ((yWert - 2) < feld[0].length))
             innerhalbFeld = true;
@@ -147,9 +165,11 @@ public class Lanzentraeger extends Figur {
                 && (this.getId() != ((Figur) feld[xWert - 1][yWert - 2]).getId())) {
 
             positionen.add(new Koordinate(xWert - 1, yWert - 2));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 11 Position
         if ((xWert >= 0) && (xWert < feld.length) && ((yWert - 2) >= 0) && ((yWert - 2) < feld[0].length))
             innerhalbFeld = true;
@@ -158,9 +178,11 @@ public class Lanzentraeger extends Figur {
                 && (this.getId() != ((Figur) feld[xWert][yWert - 2]).getId())) {
 
             positionen.add(new Koordinate(xWert, yWert - 2));
-            innerhalbFeld = false;
         }
-
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
+        
         // 12 Position
         if (((xWert + 1) >= 0) && ((xWert + 1) < feld.length) && ((yWert - 2) >= 0) && ((yWert - 2) < feld[0].length))
             innerhalbFeld = true;
@@ -169,8 +191,10 @@ public class Lanzentraeger extends Figur {
                 && (this.getId() != ((Figur) feld[xWert + 1][yWert - 2]).getId())) {
 
             positionen.add(new Koordinate(xWert + 1, yWert - 2));
-            innerhalbFeld = false;
         }
+        
+        if(innerhalbFeld)
+            innerhalbFeld = false;
         
         return positionen;
 

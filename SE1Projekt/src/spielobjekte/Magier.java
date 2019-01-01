@@ -41,73 +41,170 @@ public class Magier extends Figur {
 
         // Kontrolle, welche Felder in Angriffsweite sind und eine gegnerische Figur
         // darauf haben. Bei dem Magier sind 6 Positionen zu betrachten.
+        // Je nachdem zu welchem Spieler der Magier gehoert, kann er nur in eine bestimmte Richtung angreifen.
 
-        // 1 Position
-        if (((xWert - 1) >= 0) && ((xWert - 1) < feld.length) && ((yWert + 1) >= 0) && ((yWert + 1) < feld[0].length))
-            innerhalbFeld = true;
-
-        if (innerhalbFeld && (feld[xWert - 1][yWert + 1] != null) && (feld[xWert - 1][yWert + 1] instanceof Figur)
-                && (this.getId() != ((Figur) feld[xWert - 1][yWert + 1]).getId())) {
-
-            positionen.add(new Koordinate(xWert - 1, yWert + 1));
-            innerhalbFeld = false;
+        if(this.getId() == 1) {
+            
+            // 1 Position
+            if (((xWert - 1) >= 0) && ((xWert - 1) < feld.length) && ((yWert + 1) >= 0) && ((yWert + 1) < feld[0].length))
+                innerhalbFeld = true;
+            
+            if (innerhalbFeld && (feld[xWert - 1][yWert + 1] != null) && (feld[xWert - 1][yWert + 1] instanceof Figur)
+                    && (this.getId() != ((Figur) feld[xWert - 1][yWert + 1]).getId())) {
+                
+                positionen.add(new Koordinate(xWert - 1, yWert + 1));
+            }
+            
+            if(innerhalbFeld)
+                innerhalbFeld = false;
+            
+            // 2 Position
+            if (((xWert - 1) >= 0) && ((xWert - 1) < feld.length) && ((yWert + 2) >= 0) && ((yWert + 2) < feld[0].length))
+                innerhalbFeld = true;
+            
+            if (innerhalbFeld && (feld[xWert - 1][yWert + 2] != null) && (feld[xWert - 1][yWert + 2] instanceof Figur)
+                    && (this.getId() != ((Figur) feld[xWert - 1][yWert + 2]).getId())) {
+                
+                positionen.add(new Koordinate(xWert - 1, yWert + 2));
+            }
+            
+            if(innerhalbFeld)
+                innerhalbFeld = false;
+            
+            // 3 Position
+            if ((xWert >= 0) && (xWert < feld.length) && ((yWert + 1) >= 0) && ((yWert + 1) < feld[0].length))
+                innerhalbFeld = true;
+            
+            if (innerhalbFeld && (feld[xWert][yWert + 1] != null) && (feld[xWert][yWert + 1] instanceof Figur)
+                    && (this.getId() != ((Figur) feld[xWert][yWert + 1]).getId())) {
+                
+                positionen.add(new Koordinate(xWert, yWert + 1));
+            }
+            
+            if(innerhalbFeld)
+                innerhalbFeld = false;
+            
+            // 4 Position
+            if ((xWert >= 0) && (xWert < feld.length) && ((yWert + 2) >= 0) && ((yWert + 2) < feld[0].length))
+                innerhalbFeld = true;
+            
+            if (innerhalbFeld && (feld[xWert][yWert + 2] != null) && (feld[xWert][yWert + 2] instanceof Figur)
+                    && (this.getId() != ((Figur) feld[xWert][yWert + 2]).getId())) {
+                
+                positionen.add(new Koordinate(xWert, yWert + 2));
+            }
+            
+            if(innerhalbFeld)
+                innerhalbFeld = false;
+            
+            // 5 Position
+            if (((xWert + 1) >= 0) && ((xWert + 1) < feld.length) && ((yWert + 1) >= 0) && ((yWert + 1) < feld[0].length))
+                innerhalbFeld = true;
+            
+            if (innerhalbFeld && (feld[xWert + 1][yWert + 1] != null) && (feld[xWert + 1][yWert + 1] instanceof Figur)
+                    && (this.getId() != ((Figur) feld[xWert + 1][yWert + 1]).getId())) {
+                
+                positionen.add(new Koordinate(xWert + 1, yWert + 1));
+            }
+            
+            if(innerhalbFeld)
+                innerhalbFeld = false;
+            
+            // 6 Position
+            if (((xWert + 1) >= 0) && ((xWert + 1) < feld.length) && ((yWert + 2) >= 0) && ((yWert + 2) < feld[0].length))
+                innerhalbFeld = true;
+            
+            if (innerhalbFeld && (feld[xWert + 1][yWert + 2] != null) && (feld[xWert + 1][yWert + 2] instanceof Figur)
+                    && (this.getId() != ((Figur) feld[xWert + 1][yWert + 2]).getId())) {
+                
+                positionen.add(new Koordinate(xWert + 1, yWert + 2));
+            }
+            
+            if(innerhalbFeld)
+                innerhalbFeld = false;
         }
-
-        // 2 Position
-        if (((xWert - 1) >= 0) && ((xWert - 1) < feld.length) && ((yWert + 2) >= 0) && ((yWert + 2) < feld[0].length))
-            innerhalbFeld = true;
-
-        if (innerhalbFeld && (feld[xWert - 1][yWert + 2] != null) && (feld[xWert - 1][yWert + 2] instanceof Figur)
-                && (this.getId() != ((Figur) feld[xWert - 1][yWert + 2]).getId())) {
-
-            positionen.add(new Koordinate(xWert - 1, yWert + 2));
-            innerhalbFeld = false;
+        
+        else if(this.getId() == 2) {
+            
+         // 1 Position
+            if (((xWert - 1) >= 0) && ((xWert - 1) < feld.length) && ((yWert - 1) >= 0) && ((yWert - 1) < feld[0].length))
+                innerhalbFeld = true;
+            
+            if (innerhalbFeld && (feld[xWert - 1][yWert - 1] != null) && (feld[xWert - 1][yWert - 1] instanceof Figur)
+                    && (this.getId() != ((Figur) feld[xWert - 1][yWert - 1]).getId())) {
+                
+                positionen.add(new Koordinate(xWert - 1, yWert - 1));
+            }
+            
+            if(innerhalbFeld)
+                innerhalbFeld = false;
+            
+            // 2 Position
+            if (((xWert - 1) >= 0) && ((xWert - 1) < feld.length) && ((yWert - 2) >= 0) && ((yWert - 2) < feld[0].length))
+                innerhalbFeld = true;
+            
+            if (innerhalbFeld && (feld[xWert - 1][yWert - 2] != null) && (feld[xWert - 1][yWert - 2] instanceof Figur)
+                    && (this.getId() != ((Figur) feld[xWert - 1][yWert - 2]).getId())) {
+                
+                positionen.add(new Koordinate(xWert - 1, yWert - 2));
+            }
+            
+            if(innerhalbFeld)
+                innerhalbFeld = false;
+            
+            // 3 Position
+            if ((xWert >= 0) && (xWert < feld.length) && ((yWert - 1) >= 0) && ((yWert - 1) < feld[0].length))
+                innerhalbFeld = true;
+            
+            if (innerhalbFeld && (feld[xWert][yWert - 1] != null) && (feld[xWert][yWert - 1] instanceof Figur)
+                    && (this.getId() != ((Figur) feld[xWert][yWert - 1]).getId())) {
+                
+                positionen.add(new Koordinate(xWert, yWert - 1));
+            }
+            
+            if(innerhalbFeld)
+                innerhalbFeld = false;
+            
+            // 4 Position
+            if ((xWert >= 0) && (xWert < feld.length) && ((yWert - 2) >= 0) && ((yWert - 2) < feld[0].length))
+                innerhalbFeld = true;
+            
+            if (innerhalbFeld && (feld[xWert][yWert - 2] != null) && (feld[xWert][yWert - 2] instanceof Figur)
+                    && (this.getId() != ((Figur) feld[xWert][yWert - 2]).getId())) {
+                
+                positionen.add(new Koordinate(xWert, yWert - 2));
+            }
+            
+            if(innerhalbFeld)
+                innerhalbFeld = false;
+            
+            // 5 Position
+            if (((xWert + 1) >= 0) && ((xWert + 1) < feld.length) && ((yWert - 1) >= 0) && ((yWert - 1) < feld[0].length))
+                innerhalbFeld = true;
+            
+            if (innerhalbFeld && (feld[xWert + 1][yWert - 1] != null) && (feld[xWert + 1][yWert - 1] instanceof Figur)
+                    && (this.getId() != ((Figur) feld[xWert + 1][yWert - 1]).getId())) {
+                
+                positionen.add(new Koordinate(xWert + 1, yWert - 1));
+            }
+            
+            if(innerhalbFeld)
+                innerhalbFeld = false;
+            
+            // 6 Position
+            if (((xWert + 1) >= 0) && ((xWert + 1) < feld.length) && ((yWert - 2) >= 0) && ((yWert - 2) < feld[0].length))
+                innerhalbFeld = true;
+            
+            if (innerhalbFeld && (feld[xWert + 1][yWert - 2] != null) && (feld[xWert + 1][yWert - 2] instanceof Figur)
+                    && (this.getId() != ((Figur) feld[xWert + 1][yWert - 2]).getId())) {
+                
+                positionen.add(new Koordinate(xWert + 1, yWert - 2));
+            }
+            
+            if(innerhalbFeld)
+                innerhalbFeld = false;
         }
-
-        // 3 Position
-        if ((xWert >= 0) && (xWert < feld.length) && ((yWert + 1) >= 0) && ((yWert + 1) < feld[0].length))
-            innerhalbFeld = true;
-
-        if (innerhalbFeld && (feld[xWert][yWert + 1] != null) && (feld[xWert][yWert + 1] instanceof Figur)
-                && (this.getId() != ((Figur) feld[xWert][yWert + 1]).getId())) {
-
-            positionen.add(new Koordinate(xWert, yWert + 1));
-            innerhalbFeld = false;
-        }
-
-        // 4 Position
-        if ((xWert >= 0) && (xWert < feld.length) && ((yWert + 2) >= 0) && ((yWert + 2) < feld[0].length))
-            innerhalbFeld = true;
-
-        if (innerhalbFeld && (feld[xWert][yWert + 2] != null) && (feld[xWert][yWert + 2] instanceof Figur)
-                && (this.getId() != ((Figur) feld[xWert][yWert + 2]).getId())) {
-
-            positionen.add(new Koordinate(xWert, yWert + 2));
-            innerhalbFeld = false;
-        }
-
-        // 5 Position
-        if (((xWert + 1) >= 0) && ((xWert + 1) < feld.length) && ((yWert + 1) >= 0) && ((yWert + 1) < feld[0].length))
-            innerhalbFeld = true;
-
-        if (innerhalbFeld && (feld[xWert + 1][yWert + 1] != null) && (feld[xWert + 1][yWert + 1] instanceof Figur)
-                && (this.getId() != ((Figur) feld[xWert + 1][yWert + 1]).getId())) {
-
-            positionen.add(new Koordinate(xWert + 1, yWert + 1));
-            innerhalbFeld = false;
-        }
-
-        // 6 Position
-        if (((xWert + 1) >= 0) && ((xWert + 1) < feld.length) && ((yWert + 2) >= 0) && ((yWert + 2) < feld[0].length))
-            innerhalbFeld = true;
-
-        if (innerhalbFeld && (feld[xWert + 1][yWert + 2] != null) && (feld[xWert + 1][yWert + 2] instanceof Figur)
-                && (this.getId() != ((Figur) feld[xWert + 1][yWert + 2]).getId())) {
-
-            positionen.add(new Koordinate(xWert + 1, yWert + 2));
-            innerhalbFeld = false;
-        }
-
+        
         return positionen;
 
     }
@@ -124,10 +221,11 @@ public class Magier extends Figur {
 
         Set<Koordinate> allePotAngriffsPos = this.bestimmePotAngriffsPos(spielfeld);
         Set<Koordinate> positionen = new HashSet<>();
-
+        
+        int aktuelleZeilenPosition = this.getK1().getX();
+        
         // Es sind 3 Positionen zu untersuchen
-
-        for (int i = -1; i <= 1; i++) {
+        for (int i = -1 + aktuelleZeilenPosition; i <= 1 + aktuelleZeilenPosition; i++) {
 
             Koordinate koordinate = new Koordinate(i, spaltenKoordinate);
             if(allePotAngriffsPos.contains(koordinate))

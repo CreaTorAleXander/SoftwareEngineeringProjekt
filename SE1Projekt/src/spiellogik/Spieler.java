@@ -78,7 +78,7 @@ public class Spieler {
     /**
      * Gibt die gewaehlte Figur zurueck.
      * 
-     * @return the gewaehlteFigur Die gewaehlte Figur
+     * @return Die gewaehlte Figur
      */
     private Figur getGewaehlteFigur() {
         return this.gewaehlteFigur;
@@ -131,7 +131,7 @@ public class Spieler {
     
     
     /**
-     * Nimmt die Angriffszuege auf, die der Spieler in dieser Angriffsphase durchfuehren moechte.
+     * Nimmt die Angriffszuege auf, die der Spieler in dieser Angriffsphase durchfuehren moechte. Art Top-level Methode
      * 
      * @param spielfeld Das zu betrachtende Spielfeld
      */
@@ -140,17 +140,22 @@ public class Spieler {
        
         Set<Figur> angriffsFaehigeFiguren = this.filtereAngriffsFaehigeFiguren(this.getFiguren(), spielfeld);
         Spielobjekt[][] feld = spielfeld.getSpielfeld();
-        Figur gewaehlteFigur = null;
         
-        while(!angriffsFaehigeFiguren.isEmpty()) {
+        
+        if(this.pruefeObAngriffMoeglich(spielfeld)) {
             
-            this.anfrageWaehleFigur(angriffsFaehigeFiguren, feld, in);
-            // gewaehlteFigur sollte jetzt eine passende Figur als Wert haben
-            
-            this.waehleAngriffsZielFuerFigur(gewaehlteFigur, feld, in, spielfeld, angriffsFaehigeFiguren);
-            // gewaehlteFigur sollte jetzt ein gueltiges Angriffsobjekt haben
+            while(!angriffsFaehigeFiguren.isEmpty()) {
+                
+                this.anfrageWaehleFigur(angriffsFaehigeFiguren, feld, in);
+                // gewaehlteFigur sollte jetzt eine passende Figur als Wert haben
+                
+                this.waehleAngriffsZielFuerFigur(this.getGewaehlteFigur(), feld, in, spielfeld, angriffsFaehigeFiguren);
+                // gewaehlteFigur sollte jetzt ein gueltiges Angriffsobjekt haben
+            }
         }
         
+        else
+            System.out.println("Sie haben diese Runde keine Figuren, die angreifen können.\nIhre Angriffsphase wird beendet.");
         
     }
     /**
@@ -190,6 +195,7 @@ public class Spieler {
                     + "ein, mit der Sie angreifen wollen.\nDabei geben Sie bitte zuerst die y-Koordinate ein und dann die x-Koordinate");
             String eingabe = in.next();
             
+            /*
             // Erster Wert ist die Zeilenangabe, zweiter Wert des String ist die Spaltenangabe
             String zeilenWert = eingabe.charAt(0) + "";
             String spaltenWert = eingabe.charAt(1) + "";
@@ -197,9 +203,12 @@ public class Spieler {
             int zeilenKoordinate = Spiel.konvertiereEingabe(zeilenWert);
             int spaltenKoordinate = Spiel.konvertiereEingabe(spaltenWert);
             
-            if(this.existiertGewaehlteFigur(angriffsFaehigeFiguren, zeilenKoordinate, spaltenKoordinate, feld)) {
+            */
+            
+            Koordinate koordinate = Spiel.konvertiereEingabe2(eingabe);
+            if(this.existiertGewaehlteFigur(angriffsFaehigeFiguren, koordinate, feld)) {
                 valideFigur = true;
-                ausgewaehlteFigur = (Figur) feld[zeilenKoordinate][spaltenKoordinate];
+                ausgewaehlteFigur = (Figur) feld[koordinate.getX()][koordinate.getY()];
                 this.setGewaehlteFigur(ausgewaehlteFigur);
             }
             
@@ -229,11 +238,14 @@ public class Spieler {
                 System.out.println("Bitte geben Sie die Koordinaten ihres Angriffsziels für diese Figur ein.");
                 String angriffsEingabe = in.next();
                 
+                /*
                 int angriffZeilenKoordinate = Spiel.konvertiereEingabe(angriffsEingabe.charAt(0) + "");
                 int angriffSpaltenKoordinate = Spiel.konvertiereEingabe(angriffsEingabe.charAt(1) + "");
                 
                 Koordinate angriffsZiel = new Koordinate(angriffZeilenKoordinate, angriffSpaltenKoordinate);
+                */
                 
+                Koordinate angriffsZiel = Spiel.konvertiereEingabe2(angriffsEingabe);
                 if(gewaehlteFigur.bestimmePotAngriffsPos(spielfeld).contains(angriffsZiel)) {
                     
                     gueltigesAngriffsziel = true;
@@ -316,7 +328,9 @@ public class Spieler {
      * 
      * @return Ob die gewaehlte Figur existiert oder nicht
      */
-    public boolean existiertGewaehlteFigur(Set<Figur> angriffsFaehigeFiguren, int zeilenWert, int spaltenWert, Spielobjekt[][] feld) {
+    public boolean existiertGewaehlteFigur(Set<Figur> angriffsFaehigeFiguren, Koordinate koordinate, Spielobjekt[][] feld) {
+        int zeilenWert = koordinate.getX();
+        int spaltenWert = koordinate.getY();
         
         if((feld[zeilenWert][spaltenWert] instanceof Figur) && angriffsFaehigeFiguren.contains(feld[zeilenWert][spaltenWert]))
             return true;
