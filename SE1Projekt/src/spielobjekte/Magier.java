@@ -109,6 +109,31 @@ public class Magier extends Figur {
         }
 
         return positionen;
+
+    }
+
+    /**
+     * Bestimmt die potenziellen Angriffspositionen in einer bestimmten Spalte
+     * 
+     * @param spaltenKoordinate Die zu betrachtende Spalte
+     * 
+     * @return Eine Menge an Koordinate der potzentiellen Angriffspositionen in
+     *         dieser Spalte
+     */
+    public Set<Koordinate> bestimmePotAngriffsPositionenInSpalte(int spaltenKoordinate, Spielfeld spielfeld) {
+
+        Set<Koordinate> allePotAngriffsPos = this.bestimmePotAngriffsPos(spielfeld);
+        Set<Koordinate> positionen = new HashSet<>();
+
+        // Es sind 3 Positionen zu untersuchen
+
+        for (int i = -1; i <= 1; i++) {
+
+            Koordinate koordinate = new Koordinate(i, spaltenKoordinate);
+            if(allePotAngriffsPos.contains(koordinate))
+                positionen.add(koordinate);
+        }
         
+        return positionen;
     }
 }

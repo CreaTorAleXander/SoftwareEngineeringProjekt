@@ -36,6 +36,11 @@ public class Spieler {
      * Liste in der die Figuren des Spielers gespeichert werden.
      */
     private List<Figur> figuren = new ArrayList<Figur>();
+    
+    /**
+     * Die aktuell gewaehlte Figur des Spielers in der Angriffsphase
+     */
+    private Figur gewaehlteFigur = null;
 
     /**
      * Erzeugt ein neues Objekt. Dabei werden die Figuren zu der Liste der Figuren
@@ -69,6 +74,24 @@ public class Spieler {
     }
 
     // Methoden, die fuer die Angriffsphase da sind.
+
+    /**
+     * Gibt die gewaehlte Figur zurueck.
+     * 
+     * @return the gewaehlteFigur Die gewaehlte Figur
+     */
+    private Figur getGewaehlteFigur() {
+        return this.gewaehlteFigur;
+    }
+
+    /**
+     * Setzt die gewaehlte Figur.
+     * 
+     * @param gewaehlteFigur Die zu setzende gewaehlte Figur
+     */
+    private void setGewaehlteFigur(Figur gewaehlteFigur) {
+        this.gewaehlteFigur = gewaehlteFigur;
+    }
 
     /**
      * Prueft ob der Spieler in dieser Runde Figuren kontrolliert, mit denen er angreifen kann.
@@ -106,6 +129,7 @@ public class Spieler {
         return gefilterteFiguren;
     }
     
+    
     /**
      * Nimmt die Angriffszuege auf, die der Spieler in dieser Angriffsphase durchfuehren moechte.
      * 
@@ -113,97 +137,22 @@ public class Spieler {
      */
     
     public void nehmeAngriffsInfoAuf(Scanner in, Spielfeld spielfeld) {
-        Set<Figur> angriffsFaehigeFiguren;
-        angriffsFaehigeFiguren = this.filtereAngriffsFaehigeFiguren(this.getFiguren(), spielfeld);
+       
+        Set<Figur> angriffsFaehigeFiguren = this.filtereAngriffsFaehigeFiguren(this.getFiguren(), spielfeld);
         Spielobjekt[][] feld = spielfeld.getSpielfeld();
         Figur gewaehlteFigur = null;
-        String ausgabe = "Die Figuren, mit denen in dieser Phase angegriffen werden kann:\n";
-        System.out.println(ausgabe);
         
-       
-        
-        // Der User wird solange aufgefordert Eingaben zu machen, bis Angriffskoordinaten für alle angriffsfaehigen Figuren gesammelt wurden
-        // oder der User die Eingabe der Angriffskoordinaten abbricht
         while(!angriffsFaehigeFiguren.isEmpty()) {
-           
-            this.printAbkuerzungenFigurenMenge(angriffsFaehigeFiguren);
-            System.out.println("\nBitte geben sie die Koordinaten der Figur"
-                    + "ein, mit der Sie angreifen wollen.\nDabei geben Sie bitte zuerst die y-Koordinate ein und dann die x-Koordinate");
-            String eingabe = in.next();
-          
-            // Erster Wert ist die Zeilenangabe, zweiter Wert des String ist die Spaltenangabe
-            String zeilenWert = eingabe.charAt(0) + "";
-            String spaltenWert = eingabe.charAt(1) + "";
             
-           int zeilenKoordinate = Spiel.konvertiereEingabe(zeilenWert);
-           int spaltenKoordinate = Spiel.konvertiereEingabe(spaltenWert);   
-           
-           // ob die Figur, die der User auswaehlt existiert und angreifen kann
-           boolean existiertGewaehlteFigur = false;
-           // ob das gewaehlte Angriffsziel gueltig ist
-           boolean gueltigesAngriffsziel = false;
-           
-           while((!existiertGewaehlteFigur) || (!gueltigesAngriffsziel)) {
-               
-               if((feld[zeilenKoordinate][spaltenKoordinate] instanceof Figur) && angriffsFaehigeFiguren.contains(feld[zeilenKoordinate][spaltenKoordinate])) {
-                   
-                   existiertGewaehlteFigur = true;
-                   gewaehlteFigur = (Figur) feld[zeilenKoordinate][spaltenKoordinate];
-                   
-                   System.out.println("Bitte geben Sie die Koordinaten ihres Angriffsziels für diese Figur ein.");
-                   String angriffsEingabe = in.next();
-                   
-                   int angriffZeilenKoordinate = Spiel.konvertiereEingabe(angriffsEingabe.charAt(0) + "");
-                   int angriffSpaltenKoordinate = Spiel.konvertiereEingabe(angriffsEingabe.charAt(1) + "");
-                   
-                   Koordinate angriffsZiel = new Koordinate(angriffZeilenKoordinate, angriffSpaltenKoordinate);
-                   
-                   if(gewaehlteFigur.bestimmePotAngriffsPos(spielfeld).contains(angriffsZiel)) {
-                       
-                       gueltigesAngriffsziel = true;
-                   }
-                   
-                   else if(!(gewaehlteFigur.bestimmePotAngriffsPos(spielfeld).contains(angriffsZiel))) {
-                       
-                       System.out.println("Dies ist keine gültige Koordinate als Angriffsziel. Bitte geben sie eine gültige Koordinate ein.");
-                   }
-                   
-                   boolean gueltigeAngriffshaltung = false;
-                   
-                   while(!gueltigeAngriffshaltung && existiertGewaehlteFigur && gueltigesAngriffsziel) {
-                       
-                       System.out.println("Bitte wählen sie ihre Angriffshaltung für diese Figur aus (Schere, Stein, Papier)");
-                       String haltung = in.next().toLowerCase();
-                       
-                       if(haltung.equals("schere")) {
-                           gewaehlteFigur.setAngriffsart(new Angriffsobjekt(angriffsZiel, Angriffsart.SCHERE));
-                           gueltigeAngriffshaltung = true;
-                           angriffsFaehigeFiguren.remove(gewaehlteFigur);
-                       }
-                       
-                       else if(haltung.equals("stein")) {
-                           gewaehlteFigur.setAngriffsart(new Angriffsobjekt(angriffsZiel, Angriffsart.STEIN));
-                           gueltigeAngriffshaltung = true;
-                           angriffsFaehigeFiguren.remove(gewaehlteFigur);
-                       }
-                       
-                       else if(haltung.equals("papier")) {
-                           gewaehlteFigur.setAngriffsart(new Angriffsobjekt(angriffsZiel, Angriffsart.PAPIER));
-                           gueltigeAngriffshaltung = true;
-                           angriffsFaehigeFiguren.remove(gewaehlteFigur);
-                       }
-                       
-                       else {
-                           System.out.println("Diese Angriffshaltung existiert nicht. Bitte geben sie eine gültige Angriffshaltung ein.");
-                       }
-                   }
-               }
-               
-               System.out.println("Auf dieser Position ist keine Figur, die Sie kontrollieren.\n Bitte geben sie gültige Koordinaten ein.");
-           }
+            this.anfrageWaehleFigur(angriffsFaehigeFiguren, feld, in);
+            // gewaehlteFigur sollte jetzt eine passende Figur als Wert haben
+            
+            this.waehleAngriffsZielFuerFigur(gewaehlteFigur, feld, in, spielfeld, angriffsFaehigeFiguren);
+            // gewaehlteFigur sollte jetzt ein gueltiges Angriffsobjekt haben
         }
+        
+        
     }
-    
     /**
      * Gibt die Abkuerzungen der Figuren aus einer Menge an Figuren aus.
      * 
@@ -216,6 +165,162 @@ public class Spieler {
             System.out.print(figur.getName() + " ");
         }
         System.out.println();
+    }
+    
+    /**
+     * Fordere User auf eine Figur fuer einen Angriffs auszuwaehlen.
+     * 
+     * @param angriffsFaehigeFiguren Die Menge der Figuren, die angriffsfaehig sind
+     * @param feld Das Feld, auf dem sich die Figuren befinden.
+     * @param in Der Scanner, ueber den die Eingaben erfolgen
+     */
+    public void anfrageWaehleFigur(Set<Figur> angriffsFaehigeFiguren, Spielobjekt[][] feld, Scanner in) {
+        
+        String ausgabe = "Die Figuren, mit denen in dieser Phase angegriffen werden kann:\n";
+        System.out.println(ausgabe);
+        
+        this.printAbkuerzungenFigurenMenge(angriffsFaehigeFiguren);
+        
+        boolean valideFigur = false;
+        Figur ausgewaehlteFigur = null;
+        
+        while(!valideFigur) {
+            
+            System.out.println("\nBitte geben sie die Koordinaten der Figur"
+                    + "ein, mit der Sie angreifen wollen.\nDabei geben Sie bitte zuerst die y-Koordinate ein und dann die x-Koordinate");
+            String eingabe = in.next();
+            
+            // Erster Wert ist die Zeilenangabe, zweiter Wert des String ist die Spaltenangabe
+            String zeilenWert = eingabe.charAt(0) + "";
+            String spaltenWert = eingabe.charAt(1) + "";
+            
+            int zeilenKoordinate = Spiel.konvertiereEingabe(zeilenWert);
+            int spaltenKoordinate = Spiel.konvertiereEingabe(spaltenWert);
+            
+            if(this.existiertGewaehlteFigur(angriffsFaehigeFiguren, zeilenKoordinate, spaltenKoordinate, feld)) {
+                valideFigur = true;
+                ausgewaehlteFigur = (Figur) feld[zeilenKoordinate][spaltenKoordinate];
+                this.setGewaehlteFigur(ausgewaehlteFigur);
+            }
+            
+            if(!valideFigur)
+                System.out.println("Auf dieser Position ist keine Figur, die Sie kontrollieren.\n Bitte geben sie gültige Koordinaten ein.");
+        }
+        
+    }
+    
+    /**
+     * Fordert den User auf das Angriffsziel fuer die gewaehlte Figur auszuwaehlen.
+     * 
+     * @param gewaehlteFigur Die aktuell gewaehlte Figur
+     * @param feld Das Feld, auf dem sich die Figuren befinden
+     * @param in Der Scanner, ueber den die Eingabe erfolgt
+     * @param spielfeld Das Spielfeld mit dem der Spieler interagiert
+     */
+    public void waehleAngriffsZielFuerFigur(Figur gewaehlteFigur, Spielobjekt[][] feld, Scanner in, Spielfeld spielfeld, Set<Figur> angriffsFaehigeFiguren) {
+       
+        // ob das gewaehlte Angriffsziel gueltig ist
+        boolean gueltigesAngriffsziel = false;
+        
+        while(!gueltigesAngriffsziel) {
+          
+            if(!(gewaehlteFigur instanceof Magier)){
+                
+                System.out.println("Bitte geben Sie die Koordinaten ihres Angriffsziels für diese Figur ein.");
+                String angriffsEingabe = in.next();
+                
+                int angriffZeilenKoordinate = Spiel.konvertiereEingabe(angriffsEingabe.charAt(0) + "");
+                int angriffSpaltenKoordinate = Spiel.konvertiereEingabe(angriffsEingabe.charAt(1) + "");
+                
+                Koordinate angriffsZiel = new Koordinate(angriffZeilenKoordinate, angriffSpaltenKoordinate);
+                
+                if(gewaehlteFigur.bestimmePotAngriffsPos(spielfeld).contains(angriffsZiel)) {
+                    
+                    gueltigesAngriffsziel = true;
+                    Set<Koordinate> dieAngriffsZiele = new HashSet<>();
+                    dieAngriffsZiele.add(angriffsZiel);
+                    this.waehleAngriffshaltung(gewaehlteFigur, in, angriffsFaehigeFiguren, dieAngriffsZiele);
+                }
+                
+            }
+            
+            // Ist die gewaehlte Figur ein Magier, waehlt der User die Spalte, in der die 3 Felder gleichzeitig angegriffen werden
+            
+            else if(gewaehlteFigur instanceof Magier) {
+                
+                System.out.println("Bitte geben Sie eine y Koordinate ein, also die Spalte, die zum Ziel des Angriffs des Magiers werden soll.");
+                String angriffsEingabe = in.next();
+                
+                int angriffSpaltenKoordinate = Spiel.konvertiereEingabe(angriffsEingabe.charAt(0) + "");
+                Set<Koordinate> dieAngriffsZiele = ((Magier) gewaehlteFigur).bestimmePotAngriffsPositionenInSpalte(angriffSpaltenKoordinate, spielfeld);
+                
+               if(!dieAngriffsZiele.isEmpty()) {
+                   gueltigesAngriffsziel = true;
+                   this.waehleAngriffshaltung(gewaehlteFigur, in, angriffsFaehigeFiguren, dieAngriffsZiele);
+               }
+            }
+            
+            // War die Eingabe nicht korrekt, wird der User aufgefordert erneut ein Angriffsziel einzugeben
+            if(!gueltigesAngriffsziel)
+                System.out.println("Das war kein gueltiges Angriffsziel für diese Figur. Bitte geben sie eine gueltige Koordinate als Angriffsziel ein.");
+        }
+    }
+    
+    /**
+     * Fordert den User auf die Angriffshaltung fuer die gewaehlte Figur zu waehlen.
+     * 
+     * @param gewaehlteFigur Die gewaehlte Figur
+     * @param in Der Scanner, ueber den die Eingabe erfolgt.
+     * @param angriffsFaehigeFiguren Die Menge der angriffsfaehigen Figuren
+     * @param angriffsZiel Das Angriffsziel der gewaehlten Figur
+     */
+    public void waehleAngriffshaltung(Figur gewaehlteFigur, Scanner in, Set<Figur> angriffsFaehigeFiguren, Set<Koordinate> angriffsZiele) {
+        
+        boolean gueltigeAngriffshaltung = false;
+        
+        while(!gueltigeAngriffshaltung) {
+            
+            System.out.println("Bitte wählen sie ihre Angriffshaltung für diese Figur aus (Schere, Stein, Papier)");
+            String haltung = in.next().toLowerCase();
+            
+            if(haltung.equals("schere")) {
+                gewaehlteFigur.setAngriffsart(new Angriffsobjekt(angriffsZiele, Angriffsart.SCHERE));
+                gueltigeAngriffshaltung = true;
+                angriffsFaehigeFiguren.remove(gewaehlteFigur);
+            }
+            
+            else if(haltung.equals("stein")) {
+                gewaehlteFigur.setAngriffsart(new Angriffsobjekt(angriffsZiele, Angriffsart.STEIN));
+                gueltigeAngriffshaltung = true;
+                angriffsFaehigeFiguren.remove(gewaehlteFigur);
+            }
+            
+            else if(haltung.equals("papier")) {
+                gewaehlteFigur.setAngriffsart(new Angriffsobjekt(angriffsZiele, Angriffsart.PAPIER));
+                gueltigeAngriffshaltung = true;
+                angriffsFaehigeFiguren.remove(gewaehlteFigur);
+            }
+            
+            else {
+                System.out.println("Diese Angriffshaltung existiert nicht. Bitte geben sie eine gültige Angriffshaltung ein.");
+            }
+        }
+    }
+    /**
+     * Kontrolliert, ob die gewaehlte Figur tatsaechlich existiert.
+     * 
+     * @param angriffsFaehigeFiguren Die Menge der angriffsfaehigen Figuren
+     * @param zeilenWert Der Zeilenwert der Position, an der sich die Figur befinden soll
+     * @param spaltenWert Der Spaltenwert der Position, an der sich die Figur befinden soll
+     * @param feld Das Feld, auf dem sich die Figur befinden soll
+     * 
+     * @return Ob die gewaehlte Figur existiert oder nicht
+     */
+    public boolean existiertGewaehlteFigur(Set<Figur> angriffsFaehigeFiguren, int zeilenWert, int spaltenWert, Spielobjekt[][] feld) {
+        
+        if((feld[zeilenWert][spaltenWert] instanceof Figur) && angriffsFaehigeFiguren.contains(feld[zeilenWert][spaltenWert]))
+            return true;
+        return false;
     }
     
 }

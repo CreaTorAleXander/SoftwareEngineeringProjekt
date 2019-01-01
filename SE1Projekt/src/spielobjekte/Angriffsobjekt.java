@@ -1,5 +1,7 @@
 package spielobjekte;
 
+import java.util.Set;
+
 /**
  * Eine Klasse, die ein Angriffsobjekt erzeugen soll
  * 
@@ -8,7 +10,7 @@ package spielobjekte;
  */
 public class Angriffsobjekt {
 
-	private Koordinate angriffskoordinate;
+	private Set<Koordinate> angriffskoordinaten;
 	private Angriffsart angriffshaltung;
 	private int erlittenerSchaden;
 	
@@ -20,8 +22,8 @@ public class Angriffsobjekt {
 	 * @param angriffskoordinate Koordinate des Objektes
 	 * @param angriffshaltung	 Angriffsart ( Enum )
 	 */
-	public Angriffsobjekt(Koordinate angriffskoordinate, Angriffsart angriffshaltung) {
-		this.angriffskoordinate = angriffskoordinate;
+	public Angriffsobjekt(Set<Koordinate> angriffskoordinaten, Angriffsart angriffshaltung) {
+		this.angriffskoordinaten = angriffskoordinaten;
 		this.angriffshaltung = angriffshaltung;
 		this.erlittenerSchaden = 0;
 	}
@@ -30,22 +32,22 @@ public class Angriffsobjekt {
 	
 	
 	/**
-	 * Getter der Koordinate des Angriffsobjektes
+	 * Getter der Koordinaten des Angriffsobjektes
 	 * 
-	 * @return angriffskoordinate Koordinate
+	 * @return angriffskoordinate Koordinaten
 	 */
-	public Koordinate getAngriffskoordinate() {
-		return angriffskoordinate;
+	public Set<Koordinate> getAngriffskoordinaten() {
+		return angriffskoordinaten;
 	}
 
 	/**
-	 * Setzt die Angriffskoordinate auf eine
-	 * bestimmte Koordinate
+	 * Setzt die Angriffskoordinaten auf eine Menge an
+	 * bestimmten Koordinaten
 	 * 
-	 * @param angriffskoordinate Koordinate
+	 * @param angriffskoordinaten Koordinaten
 	 */
-	public void setAngriffskoordinate(Koordinate angriffskoordinate) {
-		this.angriffskoordinate = angriffskoordinate;
+	public void setAngriffskoordinaten(Set<Koordinate> angriffskoordinaten) {
+		this.angriffskoordinaten = angriffskoordinaten;
 	}
 	
 	/**
