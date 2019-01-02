@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Scanner;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -24,12 +25,13 @@ public class TestAngriffsphase {
     Spieler spielerEins;
     Spieler spielerZwei;
     Spielfeld feld;
-
+    Scanner in;
     @BeforeEach
     public void initialisieren() {
         spielerEins = new Spieler();
         spielerZwei = new Spieler();
         feld = new Spielfeld();
+        in = new Scanner(System.in);
         //feld.platziereObjekte(spielerEins.getFiguren(), spielerZwei.getFiguren());
         
         // Beispielhafte Figuren von SpielerEins
@@ -73,6 +75,7 @@ public class TestAngriffsphase {
         feld.printSpielfeld();
     }
     
+    /*
     @Test
     public void test1() {
         //feld.waehleFigur(new Koordinate(2, 0), spielerEins);
@@ -97,8 +100,18 @@ public class TestAngriffsphase {
             }
             System.out.println();
         }
-        
+        System.out.println();
+        System.out.println();
         assertTrue(spielerEins.pruefeObAngriffMoeglich(feld));
+    }
+    */
+    
+    @Test
+    public void ausprobierenMethodeanfrageWaehleFigur() {
+        spielerEins.anfrageWaehleFigur(spielerEins.filtereAngriffsFaehigeFiguren(spielerEins.getFiguren(), feld), feld.getSpielfeld(), in);
+        System.out.println(spielerEins.getGewaehlteFigur().getName());
+        
+        assertTrue(true);
     }
 
 }

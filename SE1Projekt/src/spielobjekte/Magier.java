@@ -228,8 +228,12 @@ public class Magier extends Figur {
         for (int i = -1 + aktuelleZeilenPosition; i <= 1 + aktuelleZeilenPosition; i++) {
 
             Koordinate koordinate = new Koordinate(i, spaltenKoordinate);
-            if(allePotAngriffsPos.contains(koordinate))
-                positionen.add(koordinate);
+           
+            for(Koordinate vergleichKoordinate: allePotAngriffsPos) {
+                if(koordinate.equals(vergleichKoordinate))
+                    positionen.add(koordinate);
+            }
+            
         }
         
         return positionen;
