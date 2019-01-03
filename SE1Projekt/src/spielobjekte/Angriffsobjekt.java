@@ -91,6 +91,19 @@ public class Angriffsobjekt {
 	public void addSchaden(int schaden) {
 		this.erlittenerSchaden+=schaden;
 	}
+
+    /* (non-Javadoc)
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        String dieAngriffskoordinaten = "";
+        for(Koordinate koordinate: this.getAngriffskoordinaten()) {
+            dieAngriffskoordinaten += koordinate.toString() + "  ";
+        }
+        return "Angriffsobjekt [angriffskoordinaten=" + dieAngriffskoordinaten + ", angriffshaltung=" + angriffshaltung
+                + ", erlittenerSchaden=" + erlittenerSchaden + "]";
+    }
 	
 	/*---------------------*/
 	

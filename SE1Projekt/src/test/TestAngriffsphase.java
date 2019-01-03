@@ -2,6 +2,7 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import spiellogik.Spielfeld;
 import spielobjekte.Figur;
 import spielobjekte.Koordinate;
 import spielobjekte.Magier;
+import spielobjekte.Spielobjekt;
 
 /**
  * Klasse zum Testen der Angriffsphase
@@ -105,7 +107,7 @@ public class TestAngriffsphase {
         assertTrue(spielerEins.pruefeObAngriffMoeglich(feld));
     }
     */
-    
+    /*
     @Test
     public void ausprobierenMethodeanfrageWaehleFigur() {
         spielerEins.anfrageWaehleFigur(spielerEins.filtereAngriffsFaehigeFiguren(spielerEins.getFiguren(), feld), feld.getSpielfeld(), in);
@@ -113,5 +115,34 @@ public class TestAngriffsphase {
         
         assertTrue(true);
     }
-
+    */
+    
+    /*
+    @Test
+    public void ausprobierenMethodewaehleAngriffshaltung() {
+        spielerEins.anfrageWaehleFigur(spielerEins.filtereAngriffsFaehigeFiguren(spielerEins.getFiguren(), feld), feld.getSpielfeld(), in);
+        // waehleAngriffshaltung(Figur gewaehlteFigur, Scanner in, Set<Figur> angriffsFaehigeFiguren,
+        //Set<Koordinate> angriffsZiele)
+        Set<Koordinate> dieZiele = new HashSet<>();
+        dieZiele.add(new Koordinate(7, 6));
+        spielerEins.waehleAngriffshaltung(spielerEins.getGewaehlteFigur(), in, spielerEins.filtereAngriffsFaehigeFiguren(spielerEins.getFiguren(), feld), dieZiele);
+        System.out.println(spielerEins.getFiguren().get(4).getAngriffsart());
+    }
+    */
+    /*
+    @Test
+    public void ausprobierenMethodewaehleAngriffsZielFuerFigur() {
+        //waehleAngriffsZielFuerFigur(Figur gewaehlteFigur, Spielobjekt[][] feld, Scanner in, Spielfeld spielfeld,
+        //Set<Figur> angriffsFaehigeFiguren)
+        spielerEins.anfrageWaehleFigur(spielerEins.filtereAngriffsFaehigeFiguren(spielerEins.getFiguren(), feld), feld.getSpielfeld(), in);
+        spielerEins.waehleAngriffsZielFuerFigur(spielerEins.getGewaehlteFigur(), feld.getSpielfeld(), in, feld, spielerEins.filtereAngriffsFaehigeFiguren(spielerEins.getFiguren(), feld));
+        System.out.println(spielerEins.getFiguren().get(4).getAngriffsart());
+    }
+    */
+    /*
+    @Test
+    public void ausprobierenMethodenehmeAngriffsInfoAuf() {
+        spielerEins.nehmeAngriffsInfoAuf(in, feld);
+    }
+    */
 }

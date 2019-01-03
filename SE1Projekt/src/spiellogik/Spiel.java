@@ -271,7 +271,59 @@ public class Spiel {
 		}	
 		return koordinate;
 	}
-
+	
+	/**
+	 * Konvertiert einen String in der Form einer Spalten Koordinate in einen
+     * Zahlenwert, der der Spalte entspricht. 
+     * (Fuer die Spalteneingabe bei Waehlen der Angriffsziele fuer den Magier)
+	 * 
+	 * @param input Eingabestring
+	 * @return Koordinatenwert der eingegebenen Spalte
+	 */
+	public static int konvertiereSpaltenEingabeBeiMagier(String input) {
+	    int spaltenWert = -1;
+	    
+	    switch(input) {
+	        case "1": 
+	            spaltenWert = 0;
+	            break;
+	        
+	        case "2": 
+	            spaltenWert = 1;
+	            break; 
+	            
+	        case "3": 
+                spaltenWert = 2;
+                break;  
+                
+	        case "4": 
+                spaltenWert = 3;
+                break;  
+	        case "5": 
+                spaltenWert = 4;
+                break;  
+	        case "6": 
+                spaltenWert = 5;
+                break;
+                
+	        case "7": 
+                spaltenWert = 6;
+                break;  
+                
+	        case "8": 
+                spaltenWert = 7;
+                break;  
+                
+	        case "9": 
+                spaltenWert = 8;
+                break;  
+           
+	        case "10": 
+                spaltenWert = 9;
+                break;  
+	    }
+	    return spaltenWert;
+	}
 	
 	/**
 	 * Entscheidet ob das eine neue Runde gestartet wird

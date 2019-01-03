@@ -185,7 +185,7 @@ public class Spieler {
      */
     public void anfrageWaehleFigur(Set<Figur> angriffsFaehigeFiguren, Spielobjekt[][] feld, Scanner in) {
 
-        String ausgabe = "Die Figuren, mit denen in dieser Phase angegriffen werden kann:\n";
+        String ausgabe = "Die Figuren, mit denen in dieser Angriffsphase noch angegriffen werden kann:\n";
         System.out.println(ausgabe);
 
         this.printAbkuerzungenFigurenMenge(angriffsFaehigeFiguren);
@@ -234,16 +234,6 @@ public class Spieler {
                 System.out.println("Bitte geben Sie die Koordinaten ihres Angriffsziels für diese Figur ein.");
                 String angriffsEingabe = in.next();
 
-                /*
-                 * int angriffZeilenKoordinate =
-                 * Spiel.konvertiereEingabe(angriffsEingabe.charAt(0) + ""); int
-                 * angriffSpaltenKoordinate = Spiel.konvertiereEingabe(angriffsEingabe.charAt(1)
-                 * + "");
-                 * 
-                 * Koordinate angriffsZiel = new Koordinate(angriffZeilenKoordinate,
-                 * angriffSpaltenKoordinate);
-                 */
-
                 Koordinate angriffsZiel = Spiel.konvertiereEingabe2(angriffsEingabe);
                 if (gewaehlteFigur.bestimmePotAngriffsPos(spielfeld).contains(angriffsZiel)) {
 
@@ -264,7 +254,8 @@ public class Spieler {
                         "Bitte geben Sie eine y Koordinate ein, also die Spalte, die zum Ziel des Angriffs des Magiers werden soll.");
                 String angriffsEingabe = in.next();
 
-                int angriffSpaltenKoordinate = Spiel.konvertiereEingabe((angriffsEingabe.charAt(0) - 1) + "");
+                int angriffSpaltenKoordinate = Spiel.konvertiereSpaltenEingabeBeiMagier(angriffsEingabe.charAt(0) + "");
+
                 Set<Koordinate> dieAngriffsZiele = ((Magier) gewaehlteFigur)
                         .bestimmePotAngriffsPositionenInSpalte(angriffSpaltenKoordinate, spielfeld);
 
@@ -341,12 +332,13 @@ public class Spieler {
             Spielobjekt[][] feld) {
         int zeilenWert = koordinate.getX();
         int spaltenWert = koordinate.getY();
-        
-        // Das ist die Koordinate die standardmaeßig zurueckgegeben wird, wenn die Eingabe des Users nicht dem
+
+        // Das ist die Koordinate die standardmaeßig zurueckgegeben wird, wenn die
+        // Eingabe des Users nicht dem
         // Erwartetem entspricht (siehe konvertiereEingabe2 Methode in Spiel Klasse)
-        if((zeilenWert == -1) && (spaltenWert == -1))
+        if ((zeilenWert == -1) && (spaltenWert == -1))
             return false;
-        
+
         if ((feld[zeilenWert][spaltenWert] instanceof Figur)
                 && angriffsFaehigeFiguren.contains(feld[zeilenWert][spaltenWert]))
             return true;
