@@ -15,6 +15,7 @@ import spiellogik.Spielfeld;
 import spielobjekte.Figur;
 import spielobjekte.Koordinate;
 import spielobjekte.Magier;
+import spielobjekte.Schwertkaempfer;
 import spielobjekte.Spielobjekt;
 
 /**
@@ -44,40 +45,57 @@ public class TestAngriffsphase {
         // Schwertkaempfer
         feld.getSpielfeld()[5][4] = spielerEins.getFiguren().get(1);
         spielerEins.getFiguren().get(1).setK1(new Koordinate(5, 4));
+        spielerEins.getFiguren().get(1).setLeben(1);
         
         // Lanzentraeger
         feld.getSpielfeld()[7][4] = spielerEins.getFiguren().get(4);
         spielerEins.getFiguren().get(4).setK1(new Koordinate(7, 4));
+        spielerEins.getFiguren().get(4).setLeben(1);
         
         // Magier
         feld.getSpielfeld()[2][4] = spielerEins.getFiguren().get(2);
         spielerEins.getFiguren().get(2).setK1(new Koordinate(2, 4));
+        spielerEins.getFiguren().get(2).setLeben(1);
         
         // Bogenschuetze
         feld.getSpielfeld()[1][4] = spielerEins.getFiguren().get(3);
         spielerEins.getFiguren().get(3).setK1(new Koordinate(1, 4));
+        spielerEins.getFiguren().get(3).setLeben(1);
         
         // Reiter
         feld.getSpielfeld()[4][4] = spielerEins.getFiguren().get(0);
         spielerEins.getFiguren().get(0).setK1(new Koordinate(4, 4));
+        spielerEins.getFiguren().get(0).setLeben(1);
+        
         
         // Beispielhafte Figuren von SpielerZwei
         feld.getSpielfeld()[5][5] = spielerZwei.getFiguren().get(1);
         spielerZwei.getFiguren().get(1).setK1(new Koordinate(5, 5));
+        spielerZwei.getFiguren().get(1).setLeben(1);
         
-        feld.getSpielfeld()[7][6] = spielerZwei.getFiguren().get(3);
-        spielerZwei.getFiguren().get(3).setK1(new Koordinate(7, 6));
+        
+        feld.getSpielfeld()[7][7] = spielerZwei.getFiguren().get(3);
+        spielerZwei.getFiguren().get(3).setK1(new Koordinate(7, 7));
+        spielerZwei.getFiguren().get(3).setLeben(1);
         
         feld.getSpielfeld()[2][6] = spielerZwei.getFiguren().get(4);
         spielerZwei.getFiguren().get(4).setK1(new Koordinate(2, 6));
+        spielerZwei.getFiguren().get(4).setLeben(1);
+        
         
         feld.getSpielfeld()[1][5] = spielerZwei.getFiguren().get(2);
         spielerZwei.getFiguren().get(2).setK1(new Koordinate(1, 5));
+        spielerZwei.getFiguren().get(2).setLeben(1);
+        
         
         feld.getSpielfeld()[3][5] = spielerZwei.getFiguren().get(0);
         spielerZwei.getFiguren().get(0).setK1(new Koordinate(3, 5));
+        spielerZwei.getFiguren().get(0).setLeben(1);
         
         //feld.printSpielfeld();
+        
+        
+        
     }
     
     /*
@@ -149,8 +167,12 @@ public class TestAngriffsphase {
     }
     */
     
+    /*
     @Test
     public void ausprobierenMethodedurchfuehrenAngriffsphase() {
-        spiel.durchfuehrenAngriffsphase(spielerEins, spielerZwei, in, feld);
+        Spiel.durchfuehrenAngriffsphase(spielerEins, spielerZwei, in, feld);
+        
+        assertTrue(true);
     }
+    */
 }

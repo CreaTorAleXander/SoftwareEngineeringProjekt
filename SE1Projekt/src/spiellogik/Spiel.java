@@ -362,17 +362,21 @@ public class Spiel {
 	}
 	
 	/**
+	 * Startet die Angriffsphase.
+	 */
+	public static void starteAngriffsphase() {
+	    // Die Angriffsphase wird vollstaendig durchgefuehrt.
+	    Spiel.durchfuehrenAngriffsphase(spieler1, spieler2, scanner, spielfeld);
+	}
+	
+	/**
 	 * Fuehrt die Angriffsphase für jeweils beide Spieler nacheinander aus.
 	 * @param spielerEins Der erste Spieler
 	 * @param spielerZwei Der zweite Spieler
 	 * @param in Der Scanner ueber den die Eingabe des Users erfolgt
 	 * @param feld Das Spielfeld
 	 */
-	public void durchfuehrenAngriffsphase(Spieler spielerEins, Spieler spielerZwei, Scanner in, Spielfeld feld) {
-	    boolean wirdKampfStattfinden = false;
-	    
-	    if(spielerEins.pruefeObAngriffMoeglich(feld) && spielerZwei.pruefeObAngriffMoeglich(feld))
-	        wirdKampfStattfinden = true;
+	public static void durchfuehrenAngriffsphase(Spieler spielerEins, Spieler spielerZwei, Scanner in, Spielfeld feld) {
 	    
 	    if(spielerEins != null) {
 	        feld.printSpielfeld();
@@ -385,56 +389,66 @@ public class Spiel {
 	        System.out.println("\nSpieler 2 ist an der Reihe.");
 	        spielerZwei.nehmeAngriffsInfoAuf(in, feld);
 	    }
+	    
+	    Spiel.fuehreSchadensberechnungDurch(spielerEins, spielerZwei, feld);
+	    
+	    
 	}
 	
 	/**
 	 * Fuehrt den Angriff fuer den jeweiligen Spieler durch.
+	 * Zeigt, welche Angriffe stattfanden.
 	 *
 	 * @param spieler Der Spieler, dessen Figuren jetzt angreifen
 	 * @param feld Das Spielfeld
 	 * @param spielerId Fuer welchen Spieler die Figuren angreifen
 	 */
-	public void fuehreAngriffdesSpielersDurch(Spieler spieler, Spielfeld feld, String spielerId, String spielerIdGegner) {
+	public static void fuehreAngriffdesSpielersDurch(Spieler spieler, Spielfeld feld, String spielerId, String spielerIdGegner) {
 	   
-	    for(Figur figur: spieler.getFiguren()) {
-	        // Es muessen nur die Figuren betrachtet werden, die angreifen werden
-	        if(figur.getAngriffsart() != null) {
-	            // Alle Angriffsziele der Figur werden angegriffen
-	            for(Koordinate koordinate: figur.getAngriffsart().getAngriffskoordinaten()) {
-	                
-	                Figur eineFigur = ((Figur)feld.getSpielfeld()[koordinate.getX()][koordinate.getY()]);
-	                
-	                if(((Figur)feld.getSpielfeld()[koordinate.getX()][koordinate.getY()]).getAngriffsart() == null) {
-	                   
-	                    eineFigur.setLeben((eineFigur.getLeben()) - 1);
-	                    System.out.println(figur.getName() + "von Spieler " + spielerId + " hat " + eineFigur.getName() + " von "
-	                            + "Spieler " + spielerIdGegner + " erfolgreich angegriffen.");
-	                }
-	                
-	                if((eineFigur.getAngriffsart() != null) && figur.getAngriffsart().getAngriffshaltung().equals(Angriffsart.PAPIER)
-	                        && eineFigur.getAngriffsart().getAngriffshaltung().equals(Angriffsart.STEIN)) {
+	    if(spieler.getFiguren() != null) {
+	        
+	        for(Figur figur: spieler.getFiguren()) {
+	           
+	            // Es muessen nur die Figuren betrachtet werden, die angreifen werden
+	            if((figur != null) && (figur.getAngriffsart() != null)) {
+	               
+	                // Alle Angriffsziele der Figur werden angegriffen
+	                for(Koordinate koordinate: figur.getAngriffsart().getAngriffskoordinaten()) {
 	                    
-	                    eineFigur.setLeben((eineFigur.getLeben()) - 1);
-	                    System.out.println(figur.getName() + "von Spieler " + spielerId + " hat " + eineFigur.getName() + " von "
-                                + "Spieler " + spielerIdGegner + " erfolgreich angegriffen.");
-	                }
-	                
-	                if((eineFigur.getAngriffsart() != null) && figur.getAngriffsart().getAngriffshaltung().equals(Angriffsart.STEIN)
-                            && eineFigur.getAngriffsart().getAngriffshaltung().equals(Angriffsart.SCHERE)) {
-                        
-                        eineFigur.setLeben((eineFigur.getLeben()) - 1);
-                        System.out.println(figur.getName() + "von Spieler " + spielerId + " hat " + eineFigur.getName() + " von "
-                                + "Spieler " + spielerIdGegner + " erfolgreich angegriffen.");
-                    }
-	                
-	                if((eineFigur.getAngriffsart() != null) && figur.getAngriffsart().getAngriffshaltung().equals(Angriffsart.SCHERE)
-                            && eineFigur.getAngriffsart().getAngriffshaltung().equals(Angriffsart.PAPIER)) {
-                        
-                        eineFigur.setLeben((eineFigur.getLeben()) - 1);
-                        System.out.println(figur.getName() + "von Spieler " + spielerId + " hat " + eineFigur.getName() + " von "
-                                + "Spieler " + spielerIdGegner + " erfolgreich angegriffen.");
-                    }
+	                    Figur eineFigur = ((Figur)feld.getSpielfeld()[koordinate.getX()][koordinate.getY()]);
 	                    
+	                    if(((Figur)feld.getSpielfeld()[koordinate.getX()][koordinate.getY()]).getAngriffsart() == null) {
+	                        
+	                        eineFigur.setLeben((eineFigur.getLeben()) - 1);
+	                        System.out.println(figur.getName() + " von Spieler " + spielerId + " hat " + eineFigur.getName() + " von "
+	                                + "Spieler " + spielerIdGegner + " erfolgreich angegriffen.");
+	                    }
+	                    
+	                    else if((eineFigur.getAngriffsart() != null) && figur.getAngriffsart().getAngriffshaltung().equals(Angriffsart.PAPIER)
+	                            && eineFigur.getAngriffsart().getAngriffshaltung().equals(Angriffsart.STEIN)) {
+	                        
+	                        eineFigur.setLeben((eineFigur.getLeben()) - 1);
+	                        System.out.println(figur.getName() + " von Spieler " + spielerId + " hat " + eineFigur.getName() + " von "
+	                                + "Spieler " + spielerIdGegner + " erfolgreich angegriffen.");
+	                    }
+	                    
+	                    else if((eineFigur.getAngriffsart() != null) && figur.getAngriffsart().getAngriffshaltung().equals(Angriffsart.STEIN)
+	                            && eineFigur.getAngriffsart().getAngriffshaltung().equals(Angriffsart.SCHERE)) {
+	                        
+	                        eineFigur.setLeben((eineFigur.getLeben()) - 1);
+	                        System.out.println(figur.getName() + " von Spieler " + spielerId + " hat " + eineFigur.getName() + " von "
+	                                + "Spieler " + spielerIdGegner + " erfolgreich angegriffen.");
+	                    }
+	                    
+	                    else if((eineFigur.getAngriffsart() != null) && figur.getAngriffsart().getAngriffshaltung().equals(Angriffsart.SCHERE)
+	                            && eineFigur.getAngriffsart().getAngriffshaltung().equals(Angriffsart.PAPIER)) {
+	                        
+	                        eineFigur.setLeben((eineFigur.getLeben()) - 1);
+	                        System.out.println(figur.getName() + " von Spieler " + spielerId + " hat " + eineFigur.getName() + " von "
+	                                + "Spieler " + spielerIdGegner + " erfolgreich angegriffen.");
+	                    }
+	                    
+	                }
 	            }
 	        }
 	    }
@@ -449,9 +463,57 @@ public class Spiel {
 	 * @param spielerZwei Der zweite Spieler
 	 * @param feld Das Spielfeld
 	 */
-	/*
-	public void fuehreSchadensberechnungDurch(Spieler spielerEins, Spieler spielerZwei, Spielfeld feld) {
+	
+	public static void fuehreSchadensberechnungDurch(Spieler spielerEins, Spieler spielerZwei, Spielfeld feld) {
+	    if(spielerEins != null)
+	        Spiel.fuehreAngriffdesSpielersDurch(spielerEins, feld, "1", "2");
 	    
+	    if(spielerZwei != null) 
+	        Spiel.fuehreAngriffdesSpielersDurch(spielerZwei, feld, "2", "1");
+	    
+	    System.out.println();
+	    
+	    // Entfernen der Figuren von Spieler 1, deren Leben kleiner gleich 0 sind
+	    List<Figur> neueFigurenSpielerEins = new ArrayList<>();
+	    
+	    for(Figur figur: spielerEins.getFiguren()) {
+	       
+	        if(figur != null && figur.getLeben() <= 0) {
+                System.out.println(figur.getName() + " von Spieler 1 ist diese Runde gefallen.");
+            }
+	        
+	        if((figur != null ) && (figur.getLeben() > 0))
+	            neueFigurenSpielerEins.add(figur);
+	    }
+	    
+	    spielerEins.setFiguren(neueFigurenSpielerEins);
+	    
+	    // Entfernen der Figuren von Spieler 2, deren Leben kleiner gleich 0 sind
+	    List<Figur> neueFigurenSpielerZwei = new ArrayList<>();
+        
+        for(Figur figur: spielerZwei.getFiguren()) {
+           
+            if(figur != null && figur.getLeben() <= 0) {
+                System.out.println(figur.getName() + " von Spieler 2 ist diese Runde gefallen.");
+            }
+            
+            if((figur != null ) && (figur.getLeben() > 0))
+                neueFigurenSpielerZwei.add(figur);
+        }
+        
+        spielerZwei.setFiguren(neueFigurenSpielerZwei);
+	    
+	    // Zuruecksetzen der Angriffsobjekte der Figuren von Spieler 1
+	    for(Figur figur: spielerEins.getFiguren()) {
+	        if((figur != null) && (figur.getAngriffsart() != null))
+	            figur.setzeAngriffsobjektZurueck();
+	    }
+	    
+	    // Zuruecksetzen der Angriffsobjekte der Figuren von Spieler 2
+	    for(Figur figur: spielerZwei.getFiguren()) {
+	        if((figur != null) && (figur.getAngriffsart() != null))
+	            figur.setzeAngriffsobjektZurueck();
+	    }
 	}
-	*/
+	
 }

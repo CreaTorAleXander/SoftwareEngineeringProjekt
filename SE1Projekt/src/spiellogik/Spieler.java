@@ -70,7 +70,8 @@ public class Spieler {
      * @param figuren Die zu setzenden Figuren
      */
     public void setFiguren(List<Figur> figuren) {
-        this.figuren = figuren;
+        if(figuren != null)
+            this.figuren = figuren;
     }
 
     // Methoden, die fuer die Angriffsphase da sind.
@@ -119,13 +120,16 @@ public class Spieler {
     public Set<Figur> filtereAngriffsFaehigeFiguren(List<Figur> figuren, Spielfeld spielfeld) {
 
         Set<Figur> gefilterteFiguren = new HashSet<>();
-
-        // Fuegt alle Figuren des Spielers, derene Menge an Angriffspositionen nicht
-        // leer ist
-        // zu der Menge der angriffsfaehigen Figuren hinzu.
-        for (Figur figur : this.getFiguren()) {
-            if (!figur.bestimmePotAngriffsPos(spielfeld).isEmpty())
-                gefilterteFiguren.add(figur);
+        
+        if(figuren != null) {
+            
+            // Fuegt alle Figuren des Spielers, derene Menge an Angriffspositionen nicht
+            // leer ist
+            // zu der Menge der angriffsfaehigen Figuren hinzu.
+            for (Figur figur : this.getFiguren()) {
+                if ((figur != null) && !figur.bestimmePotAngriffsPos(spielfeld).isEmpty())
+                    gefilterteFiguren.add(figur);
+            }
         }
 
         return gefilterteFiguren;
@@ -254,7 +258,7 @@ public class Spieler {
             else if (gewaehlteFigur instanceof Magier) {
 
                 System.out.println(
-                        "Bitte geben Sie eine y Koordinate ein, also die Spalte, die zum Ziel des Angriffs des Magiers werden soll.");
+                        "Bitte geben Sie die Spalte ein, die zum Ziel des Angriffs des Magiers werden soll.");
                 String angriffsEingabe = in.next();
 
                 int angriffSpaltenKoordinate = Spiel.konvertiereSpaltenEingabeBeiMagier(angriffsEingabe.charAt(0) + "");
