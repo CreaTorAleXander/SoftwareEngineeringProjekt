@@ -153,6 +153,9 @@ public class Spieler {
                 this.waehleAngriffsZielFuerFigur(this.getGewaehlteFigur(), feld, in, spielfeld, angriffsFaehigeFiguren);
                 // gewaehlteFigur sollte jetzt ein gueltiges Angriffsobjekt haben
             }
+            
+            System.out.println("Sie haben keine Figuren mehr, die jetzt diese Runde noch angreifen können.\nIhre"
+                    + " Angriffsphase wird jetzt beendet.");
         }
 
         else

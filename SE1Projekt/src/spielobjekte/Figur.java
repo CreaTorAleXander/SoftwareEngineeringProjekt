@@ -268,4 +268,11 @@ public abstract class Figur extends Spielobjekt {
      	
      	return positionen;
     }
+    
+    /**
+     * Setzt das Angriffsobjekt der Figur zurueck.
+     */
+    public void setzeAngriffsobjektZurueck() {
+        this.angriffsart = null;
+    }
 }

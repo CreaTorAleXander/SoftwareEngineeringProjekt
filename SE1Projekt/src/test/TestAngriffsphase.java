@@ -9,6 +9,7 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import spiellogik.Spiel;
 import spiellogik.Spieler;
 import spiellogik.Spielfeld;
 import spielobjekte.Figur;
@@ -28,12 +29,14 @@ public class TestAngriffsphase {
     Spieler spielerZwei;
     Spielfeld feld;
     Scanner in;
+    Spiel spiel;
     @BeforeEach
     public void initialisieren() {
         spielerEins = new Spieler();
         spielerZwei = new Spieler();
         feld = new Spielfeld();
         in = new Scanner(System.in);
+        spiel = new Spiel();
         //feld.platziereObjekte(spielerEins.getFiguren(), spielerZwei.getFiguren());
         
         // Beispielhafte Figuren von SpielerEins
@@ -74,7 +77,7 @@ public class TestAngriffsphase {
         feld.getSpielfeld()[3][5] = spielerZwei.getFiguren().get(0);
         spielerZwei.getFiguren().get(0).setK1(new Koordinate(3, 5));
         
-        feld.printSpielfeld();
+        //feld.printSpielfeld();
     }
     
     /*
@@ -145,4 +148,9 @@ public class TestAngriffsphase {
         spielerEins.nehmeAngriffsInfoAuf(in, feld);
     }
     */
+    
+    @Test
+    public void ausprobierenMethodedurchfuehrenAngriffsphase() {
+        spiel.durchfuehrenAngriffsphase(spielerEins, spielerZwei, in, feld);
+    }
 }
