@@ -370,6 +370,13 @@ public class Spiel {
 	}
 	
 	/**
+	 * Startet die Bewegungsphase
+	 */
+	public static void starteBewegungsphase() {
+		Spiel.durchfuehrenBewegungsphase(spieler1, spieler2, scanner, spielfeld);
+	}
+	
+	/**
 	 * Fuehrt die Angriffsphase für jeweils beide Spieler nacheinander aus.
 	 * @param spielerEins Der erste Spieler
 	 * @param spielerZwei Der zweite Spieler
@@ -393,6 +400,13 @@ public class Spiel {
 	    Spiel.fuehreSchadensberechnungDurch(spielerEins, spielerZwei, feld);
 	    
 	    
+	}
+	
+	/**
+	 * 
+	 */
+	public static void durchfuehrenBewegungsphase(Spieler spieler1, Spieler spieler2, Scanner in, Spielfeld feld) {
+		
 	}
 	
 	/**

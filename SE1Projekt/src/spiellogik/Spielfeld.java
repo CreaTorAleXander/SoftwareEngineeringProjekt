@@ -151,7 +151,7 @@ public class Spielfeld {
 	 */
 	public boolean pruefeBewegung(Koordinate ziel) {
 
-		// Wenn die Bewegung moeglich ist von gewaehlterFigur aus
+		/*// Wenn die Bewegung moeglich ist von gewaehlterFigur aus
 		if (spielfeld[ziel.getX()][ziel.getY()] == null) {
 			if ((gewaehlteFigur).getK1().getX() - ziel.getX() <= gewaehlteFigur.getZugweite()
 					&& (gewaehlteFigur.getK1().getX() - ziel.getX()) >= -(gewaehlteFigur.getZugweite())) {
@@ -163,8 +163,19 @@ public class Spielfeld {
 			} else
 				return false;
 		} else
+			return false;*/
+		Set<Koordinate> moeglicheBew = new HashSet<>();
+		moeglicheBew = gewaehlteFigur.bestimmePotZuege(this);
+		
+		
+		if (spielfeld[ziel.getX()][ziel.getY()] == null) {
+			if(moeglicheBew.contains(ziel))
+				return true;
+			else
+				return false;
+		}
+		else
 			return false;
-
 	}
 
 	/**

@@ -164,15 +164,15 @@ public class Reiter extends Figur {
         //Weg also versperrt, muss die Schleife verlassen werden.
         
         //Norden
-        for(int i = xFigur; i >= xFigur-this.getZugweite() && i >= 0; i--) {
+        for(int i = xFigur-1; i >= xFigur-this.getZugweite() && i >= 0; i--) {
         	if (feld[i][yFigur] != null)
         		break;
         	else
         		positionen.add(new Koordinate(i, yFigur));
         }
         
-        //S�den
-        for(int i = xFigur; i <= xFigur+this.getZugweite() && i < 10; i++) {
+        //Sueden
+        for(int i = xFigur+1; i <= xFigur+this.getZugweite() && i < 10; i++) {
         	if(feld[i][yFigur] != null)
         		break;
         	else
@@ -180,7 +180,7 @@ public class Reiter extends Figur {
         }
     	
         //Westen
-        for(int i = yFigur; i >= yFigur-this.getZugweite() && i >= 0; i--) {
+        for(int i = yFigur-1; i >= yFigur-this.getZugweite() && i >= 0; i--) {
         	if(feld[xFigur][i] != null)
         		break;
         	else
@@ -188,7 +188,7 @@ public class Reiter extends Figur {
         }
         
         //Osten
-        for(int i = yFigur; i <= yFigur+this.getZugweite() && i < 10; i++) {
+        for(int i = yFigur+1; i <= yFigur+this.getZugweite() && i < 10; i++) {
         	if(feld[xFigur][i] != null)
         		break;
         	else

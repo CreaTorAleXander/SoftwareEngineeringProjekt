@@ -246,14 +246,14 @@ public abstract class Figur extends Spielobjekt {
      	if(xFigur - this.getZugweite() < 0)
      		potX = 0;
      	else
-     		potX = xFigur - getZugweite();
+     		potX = xFigur - this.getZugweite();
      	
      	//Y-Koordinate als Startpunkt(potY) der Iteration waehlen,
      	//falls außerhalb des Feldes, ist die Startposition 0
      	if(yFigur - this.getZugweite() < 0)
      		potY = 0;
      	else 
-     		potY = yFigur - getZugweite();
+     		potY = yFigur - this.getZugweite();
     	
      	//Iteriert durch das Spielfeld. Startpunkt der Iteration ist die erste mögliche Position
      	//"oben links" im Feld.
@@ -261,7 +261,7 @@ public abstract class Figur extends Spielobjekt {
      	//2. Abbruchbedingung: Wenn über das Spielbrett hinaus iteriert wird
      	for(int i = potX; i <= (2*this.getZugweite() + potX) && i < 10; i++) {
      		for(int j = potY; j <= (2*this.getZugweite() + potY) && j < 10; j++) {
-     			if(feld[i][j] != null)
+     			if(feld[i][j] == null)
      				positionen.add(new Koordinate(i, j));
      		}
      	}
