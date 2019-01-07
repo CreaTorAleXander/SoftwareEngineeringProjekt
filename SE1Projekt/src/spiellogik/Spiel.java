@@ -39,11 +39,12 @@ public class Spiel {
 	private static void starteRunde() throws IOException {
 		spielfeld.printSpielfeld();
 		
-		System.out.println("\n Spieler 1 ist an der Reihe.\n");	
+		System.err.println("\n Spieler 1 ist an der Reihe.\n");	
 		zugDesSpielers(spieler1);
-		System.out.println("\n Spieler 2 ist an der Reihe.\n");
+		System.err.println("\n Spieler 2 ist an der Reihe.\n");
 		zugDesSpielers(spieler2);
-			
+		starteAngriffsphase();	
+		
 		beendeRunde();
 	}
 	
@@ -107,7 +108,7 @@ public class Spiel {
 				anzahlDerZuege = 0;
 			//Wenn nicht ja/nein bei der Frage eingegeben wird (ob ein Zug gemacht werden soll)
 			} else {
-				System.out.println("Invalide Antwort");
+				System.err.println("Invalide Antwort");
 			}
 		}
 		
