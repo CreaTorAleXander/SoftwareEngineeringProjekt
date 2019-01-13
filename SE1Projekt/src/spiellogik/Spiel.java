@@ -57,17 +57,18 @@ public class Spiel {
 	private static void zugDesSpielers(Spieler spieler) {
 
 		int anzahlDerZuege = spieler.getFiguren().size();
+		List<Figur> gewaehlteFiguren= new LinkedList<Figur>();
 
 		while (anzahlDerZuege > 0) {
 			System.out.println("Soll eine Figur bewegt werden? (ja/nein)");
 			String antwort = scanner.next().toUpperCase();
 			
+			
 			//Wenn ein Zug gemacht werden soll
 			if (antwort.equals("JA")) {
 				boolean isZugMoeglich = false;
 				boolean isFigur = true;
-				Koordinate k1 = new Koordinate(-1, -1);
-				
+				Koordinate k1 = new Koordinate(-1, -1);				
 				//Angabe der Koordinate der Figur, die bewegt werden soll
 				do {
 					System.out.println("Geben Sie die Koordinate der Figur ein, die bewegt werden soll");
@@ -75,10 +76,17 @@ public class Spiel {
 					isFigur = true;
 					try {
 						spielfeld.waehleFigur(k1, spieler);
+
+							if(gewaehlteFiguren.contains(spielfeld.gewaehlteFigur)) {
+								throw new InputMismatchException("Figur wurde schon gewählt!");
+							} else {
+								
+								gewaehlteFiguren.add(spielfeld.gewaehlteFigur);
+							}
 					//Catcht die eigene Exception, wenn eine Figur nicht auf der Koordinate liegt
 					} catch (InputMismatchException ex) {
 						isFigur = false;
-						System.err.println("Invalide Koordinate");
+						System.err.println(ex.getMessage());
 					}
 				} while (!isFigur);
 
@@ -100,7 +108,7 @@ public class Spiel {
 					}
 				} while (!isZugMoeglich);
 				
-				
+				spielfeld.gewaehlteFigur=null;
 				anzahlDerZuege--;
 			
 			//Ausbruch aus der While-SChleife, wenn kein Zug gemacht werden soll
