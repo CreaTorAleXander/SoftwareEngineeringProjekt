@@ -57,7 +57,7 @@ public class Spiel {
 	private static void zugDesSpielers(Spieler spieler) {
 
 		int anzahlDerZuege = spieler.getFiguren().size();
-		List<Figur> gewaehlteFiguren= new LinkedList<Figur>();
+		List<Figur> gewaehlteFiguren= new LinkedList<>();
 
 		while (anzahlDerZuege > 0) {
 			System.out.println("Soll eine Figur bewegt werden? (ja/nein)");
