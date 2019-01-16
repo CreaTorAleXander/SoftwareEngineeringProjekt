@@ -78,7 +78,7 @@ public class Spiel {
 						spielfeld.waehleFigur(k1, spieler);
 
 							if(gewaehlteFiguren.contains(spielfeld.gewaehlteFigur)) {
-								throw new InputMismatchException("Figur wurde schon gewählt!");
+								throw new InputMismatchException("Figur wurde schon gewï¿½hlt!");
 							} else {
 								
 								gewaehlteFiguren.add(spielfeld.gewaehlteFigur);
@@ -503,6 +503,7 @@ public class Spiel {
 	       
 	        if(figur != null && figur.getLeben() <= 0) {
                 System.out.println(figur.getName() + " von Spieler 1 ist diese Runde gefallen.");
+                feld.getSpielfeld()[figur.getK1().getX()][figur.getK1().getY()] = null;
             }
 	        
 	        if((figur != null ) && (figur.getLeben() > 0))
@@ -518,6 +519,7 @@ public class Spiel {
            
             if(figur != null && figur.getLeben() <= 0) {
                 System.out.println(figur.getName() + " von Spieler 2 ist diese Runde gefallen.");
+                feld.getSpielfeld()[figur.getK1().getX()][figur.getK1().getY()] = null;
             }
             
             if((figur != null ) && (figur.getLeben() > 0))
